@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Skill Check 1B - Role Play Simulation</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:15px;color:#1a1a2e;background:#f8f9fc;line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{max-width:620px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.overline{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#64748b}
+h1{font-size:21px;font-weight:600;margin:.375rem 0 .75rem;color:#0f172a}
+p{color:#64748b;font-size:14px;line-height:1.65}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card-body{padding:1.125rem 1.25rem}
+.info-header{background:#00254A;padding:14px 20px}
+.info-header .badge{font-size:10px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.info-header .name{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
+.info-header .biz{font-size:13px;color:rgba(255,255,255,.6)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;padding:14px 20px;background:#fff}
+.info-field label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:3px}
+.info-field span{font-size:13px;color:#1e293b;font-weight:500}
+.info-field.full{grid-column:1/-1}
+.info-field.full span{font-weight:400;color:#64748b}
+.badge-row{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:.5rem}
+.dot-badge{display:flex;align-items:center;gap:5px;font-size:13px;color:#64748b}
+.dot{width:5px;height:5px;border-radius:50%;background:#236CFF;flex-shrink:0}
+.score-panel{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:.875rem;background:#fff}
+.score-panel-header{background:#f8fafc;padding:10px 16px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
+.seg-name{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.07em}
+.seg-pts{font-size:12px;color:#94a3b8;font-variant-numeric:tabular-nums}
+.prog-track{height:3px;background:#f1f5f9}
+.prog-fill{height:100%;transition:width 1s cubic-bezier(.16,1,.3,1)}
+.score-row{padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f1f5f9;font-size:13px;color:#334155;transition:background .12s}
+.score-row:last-child{border-bottom:none}
+.score-row:hover{background:#f8fafc}
+.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap;margin-left:10px;border:1px solid}
+.b0{background:#fef2f2;color:#991b1b;border-color:#fca5a5}
+.b1{background:#fffbeb;color:#92400e;border-color:#fcd34d}
+.b2{background:#f0fdf4;color:#166534;border-color:#86efac}
+.b3{background:#eff6ff;color:#1e40af;border-color:#93c5fd}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;font-size:13px;font-weight:600;border-radius:10px;border:1px solid #e2e8f0;background:#fff;color:#334155;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .15s;user-select:none}
+.btn:hover{background:#f8fafc;border-color:#cbd5e1}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:#236CFF;border-color:#236CFF;color:#fff;box-shadow:0 2px 8px rgba(35,108,255,.25)}
+.btn-primary:hover{background:#1a5de8;border-color:#1a5de8;box-shadow:0 4px 12px rgba(35,108,255,.3)}
+.btn-danger{background:#dc2626;border-color:#dc2626;color:#fff}
+.btn-danger:hover{background:#b91c1c}
+.btn-success{background:#16a34a;border-color:#16a34a;color:#fff}
+.btn-success:hover{background:#15803d}
+.btn-navy{background:#00254A;border-color:#00254A;color:#fff}
+.btn-navy:hover{background:#001f3d}
+.btn-full{width:100%}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn:disabled,.btn.disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none}
+.alert{padding:11px 15px;border-radius:10px;font-size:13px;line-height:1.6;border:1px solid}
+.alert-warn{background:#fffbeb;border-color:#fcd34d;color:#92400e}
+.alert-danger{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
+.alert-info{background:#eff6ff;border-color:#93c5fd;color:#1e40af}
+textarea{width:100%;resize:vertical;padding:11px 13px;font-size:13px;border-radius:10px;border:1px solid #e2e8f0;background:#fff;color:#1e293b;line-height:1.6;font-family:inherit;outline:none;display:block;transition:border-color .2s,box-shadow .2s}
+textarea:focus{border-color:#236CFF;box-shadow:0 0 0 3px rgba(35,108,255,.12)}
+.divider{height:1px;background:#e2e8f0;margin:1.5rem 0}
+.keypad-display{width:100%;padding:13px 18px;font-size:22px;font-weight:300;letter-spacing:.12em;text-align:center;background:#fff;border:1.5px solid #e2e8f0;border-radius:11px;min-height:54px;color:#1e293b;transition:border-color .2s,color .2s,background .2s;font-variant-numeric:tabular-nums}
+.keypad-display.correct{border-color:#16a34a;color:#166534;background:#f0fdf4}
+.keypad-display.wrong{border-color:#dc2626;animation:shake .35s ease}
+.key-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:.625rem 0}
+.key-btn{padding:15px 0;font-size:17px;font-weight:400;border-radius:10px;border:1px solid #e2e8f0;background:#f8fafc;color:#1e293b;cursor:pointer;font-family:inherit;transition:background .1s,transform .1s,border-color .1s}
+.key-btn:hover{background:#fff;border-color:#cbd5e1}
+.key-btn:active{transform:scale(.93);background:#f1f5f9}
+.dial-row{display:flex;gap:8px}
+.del-btn{flex:1;padding:13px;font-size:13px;border-radius:10px;border:1px solid #e2e8f0;background:#f8fafc;color:#64748b;cursor:pointer;font-family:inherit;transition:background .1s}
+.del-btn:hover{background:#fff;border-color:#cbd5e1}
+.dial-btn{flex:2;padding:13px;font-size:14px;font-weight:600;border-radius:10px;border:none;color:#fff;cursor:pointer;font-family:inherit;transition:transform .15s,background .15s,box-shadow .15s}
+.dial-btn.ready{background:#16a34a;box-shadow:0 2px 8px rgba(22,163,74,.3)}
+.dial-btn.ready:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.35)}
+.dial-btn.not-ready{background:#cbd5e1;cursor:not-allowed}
+.ring-wrap{text-align:center;padding:4rem 1rem}
+.ring-avatar{width:76px;height:76px;border-radius:50%;background:#00254A;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.75rem;position:relative}
+.ring-pulse{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(0,37,74,.5);animation:ring-pulse 1.8s ease-out infinite}
+.ring-pulse:nth-child(2){animation-delay:.6s}
+.ring-pulse:nth-child(3){animation-delay:1.2s}
+.chat-wrap{display:flex;flex-direction:column}
+.chat-header{padding:10px 0 10px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.chat-header .cname{font-size:14px;font-weight:600;color:#0f172a}
+.chat-header .csub{font-size:12px;color:#94a3b8}
+.conn-pill{font-size:11px;padding:4px 10px;border-radius:99px;background:#f0fdf4;color:#166534;font-weight:600;border:1px solid #86efac}
+.info-strip{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 13px;display:flex;flex-wrap:wrap;gap:4px 18px;margin-bottom:.75rem;font-size:12px}
+.msgs{display:flex;flex-direction:column;gap:9px;min-height:220px;padding-bottom:.5rem;overflow-y:auto;max-height:360px}
+.msg-row{display:flex}
+.msg-row.user{justify-content:flex-end}
+.bubble{max-width:78%;border-radius:16px;padding:10px 14px;font-size:13px;line-height:1.6;border:1px solid transparent}
+.bubble.user{background:#236CFF;color:#fff;border-radius:16px 16px 4px 16px}
+.bubble.assistant{background:#f8fafc;color:#1e293b;border-color:#e2e8f0;border-radius:16px 16px 16px 4px}
+.bubble-label{font-size:11px;font-weight:600;opacity:.6;margin-bottom:3px}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:#94a3b8;display:inline-block;margin-right:3px;animation:tpulse 1.4s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s;margin-right:0}
+.input-row{display:flex;gap:8px;margin-top:.5rem}
+.input-row textarea{flex:1;min-height:62px}
+.overall-badge{padding:18px 22px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.step-card{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:.875rem;background:#fff}
+.step-header{padding:13px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #e2e8f0}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.step-body{padding:16px 18px}
+.zoom-step{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px;font-size:13px;line-height:1.6;color:#334155}
+.zoom-num{width:21px;height:21px;border-radius:50%;border:1.5px solid #86efac;color:#166534;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.coaching-item{font-size:13px;line-height:1.6;padding:8px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:9px;color:#334155}
+.coaching-item:last-child{border-bottom:none}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes ring-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+@keyframes tpulse{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+@keyframes fadein{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes stamp{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes scoring-p{from{width:0}to{width:90%}}
+.fadein{animation:fadein .3s cubic-bezier(.16,1,.3,1) both}
+.stamp{animation:stamp .45s cubic-bezier(.16,1,.3,1) both}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const SYSTEM_PROMPT = `You are Teresa Canopy, owner of Local Engravers Ltd., a stone and custom engraving business in Bristol, UK. You are receiving an unexpected outbound call from a QuickBooks sales consultant.
+
+YOUR PERSONA:
+- You answer the phone like a real busy small business owner would - a little caught off guard, mildly cautious.
+- Start with "Hello?" and be naturally sceptical at first. Warm up gradually if they explain who they are.
+- You answer what you're asked but don't elaborate unless prompted.
+- You are NOT technical. Excel works fine for you.
+- Short, natural answers. You don't monologue.
+- You previously filled out something online about accounting solutions, so if they reference that, you vaguely remember it.
+
+YOUR BUSINESS (only share when asked):
+- Business: Local Engravers Ltd. - custom stone/commercial/residential engraving in Bristol, UK
+- Residential (house numbers, name stones) and commercial (logos on business card holders, boulders at office entrances)
+- 40+ services/locations across the South West and Wales. One brick-and-mortar shop.
+- 0 employees, sole trader, owner's draw only (no payroll needed)
+- Planning to open a second location soon and hire employees long-term
+- Use Excel to track everything - no bookkeeper
+
+CURRENT PAIN POINTS (only reveal when consultant digs deeper):
+- Surface level: "I'm decent at managing my books, but we've had some delays in payment lately."
+- Deeper (only if probed): Payment delays affect cash flow and plans for a second premises.
+- Sometimes forget to pay bills - has hurt vendor relationships
+- Don't track income by category
+- Print/email invoices from home. Accept cash, cheques, bank transfers.
+- Don't always have time to create estimates when out of the office
+- Don't send payment reminders - causes project delays
+- Want to accept credit/debit cards but worried about transaction fees
+- Tax time is stressful - receipts get misplaced
+
+CALL DRIVER: You filled something out online about getting an accounting solution. Not sure what you signed up for, but you're open to hearing about it.
+
+EXPECTED RECOMMENDATION (do not reveal): QuickBooks Online Advanced - Class Tracking, Spreadsheet Sync, Workflows, Priority Circle, custom reports, forecasting.
+
+OBJECTIONS (pick 1-2 naturally):
+- "Why would Simple Start not work for this business? I have a simple business."
+- "Why can't I just buy something one time and keep it forever?"
+- "It seems expensive for what I'm trying to accomplish."
+
+ADDITIONAL QUESTIONS (ask if natural):
+- Can my accountant get access to my books?
+- Will I get help setting up my Chart of Accounts?
+
+RULES:
+- Do NOT volunteer information. Wait to be asked.
+- Keep responses conversational and short - like a real phone call.
+- Do NOT break character. Respond only as Teresa.
+- Your very first response must be just "Hello?" as if answering the phone cold.`;
+
+const SCORE_PROMPT = `You are a warm, encouraging sales coach evaluating a brand new hire on their very first sales role play.
+
+Scoring philosophy: Default generously. Award 1 (Developing) for any recognisable attempt. Award 2 (Proficient) when the skill moved the conversation forward. Reserve 0 (Not Observed) only for no evidence at all.
+
+RUBRIC (score each 0-3):
+Introduction: build_rapport, set_agenda, role_clarification, upfront_contract
+Discovery: transition_insight, open_questions, probing_questions, confirming_questions, platform_positioning, active_listening
+Proof of Concept: customer_story
+Progress the Deal: objection_handling, recap_validate, revisit_upfront, next_steps, confirmed_commitment
+
+The correct recommendation is QuickBooks Online Advanced.
+
+Return ONLY valid JSON (no markdown, no backticks):
+{"scores":{"build_rapport":0,"set_agenda":0,"role_clarification":0,"upfront_contract":0,"transition_insight":0,"open_questions":0,"probing_questions":0,"confirming_questions":0,"platform_positioning":0,"active_listening":0,"customer_story":0,"objection_handling":0,"recap_validate":0,"revisit_upfront":0,"next_steps":0,"confirmed_commitment":0},"strengths":["s1","s2","s3"],"opportunities":["o1","o2","o3"],"coaching_summary":"2-3 sentence note"}
+
+TRANSCRIPT:
+`;
+
+const CRITERIA=[
+  {key:"build_rapport",label:"Build rapport",seg:"Introduction"},
+  {key:"set_agenda",label:"Set and confirm agenda",seg:"Introduction"},
+  {key:"role_clarification",label:"Role clarification",seg:"Introduction"},
+  {key:"upfront_contract",label:"Provide upfront contract",seg:"Introduction"},
+  {key:"transition_insight",label:"Transition with insight",seg:"Discovery"},
+  {key:"open_questions",label:"Open-ended questions",seg:"Discovery"},
+  {key:"probing_questions",label:"Probing questions",seg:"Discovery"},
+  {key:"confirming_questions",label:"Confirming questions",seg:"Discovery"},
+  {key:"platform_positioning",label:"Platform value positioning",seg:"Discovery"},
+  {key:"active_listening",label:"Active listening, mirroring, empathy",seg:"Discovery"},
+  {key:"customer_story",label:"Customer story (PRO Value)",seg:"Proof of Concept"},
+  {key:"objection_handling",label:"Handled objections",seg:"Progress the Deal"},
+  {key:"recap_validate",label:"Recapped and validated",seg:"Progress the Deal"},
+  {key:"revisit_upfront",label:"Revisit upfront contract",seg:"Progress the Deal"},
+  {key:"next_steps",label:"Proposed clear next steps",seg:"Progress the Deal"},
+  {key:"confirmed_commitment",label:"Confirmed commitment",seg:"Progress the Deal"},
+];
+const SL={0:"Not Observed",1:"Developing",2:"Proficient",3:"Advanced"};
+const SEGS=[
+  {name:"Introduction",keys:["build_rapport","set_agenda","role_clarification","upfront_contract"],max:12},
+  {name:"Discovery",keys:["transition_insight","open_questions","probing_questions","confirming_questions","platform_positioning","active_listening"],max:18},
+  {name:"Proof of Concept",keys:["customer_story"],max:3},
+  {name:"Progress the Deal",keys:["objection_handling","recap_validate","revisit_upfront","next_steps","confirmed_commitment"],max:15},
+];
+const ZOOM_STEPS=[
+  "Create a new lead for Teresa Canopy / Local Engravers Ltd. in Salesforce",
+  "Convert the lead into an opportunity",
+  "Place the correct QBO order for the recommended solution",
+  "Verbalise compliance steps: T&C scripting, secure pause for PII, and next steps email",
+];
+const PHONE="07700 900123",PHONE_CLEAN="07700900123";
+
+let apiKey=localStorage.getItem("qb_rp_apikey")||"";
+let phase=apiKey?"intro":"apikey",messages=[],inputVal="",loading=false,scoreData=null;
+let showTranscript=false,confirmEnd=false,showResultsText=false,confirmRestart=false;
+let pastedTranscript="",keyDigits="",keyWrong=false;
+
+function h(tag,attrs,...children){
+  const el=document.createElement(tag);
+  if(attrs)Object.entries(attrs).forEach(([k,v])=>{
+    if(k==="class")el.className=v;
+    else if(k==="style")el.style.cssText=v;
+    else if(k.startsWith("on"))el.addEventListener(k.slice(2).toLowerCase(),v);
+    else if(k==="disabled"&&v)el.disabled=true;
+    else el.setAttribute(k,v);
+  });
+  children.flat().forEach(c=>{if(c!=null)el.appendChild(typeof c==="string"?document.createTextNode(c):c);});
+  return el;
+}
+
+function fmtPhone(d){
+  if(!d)return"";
+  if(d.length<=5)return d;
+  if(d.length<=8)return d.slice(0,5)+" "+d.slice(5);
+  return d.slice(0,5)+" "+d.slice(5,8)+" "+d.slice(8);
+}
+
+function render(){document.getElementById("root").replaceChildren(buildPhase());}
+
+function infoCard(){
+  return h("div",{class:"card"},
+    h("div",{class:"info-header"},
+      h("div",{class:"badge"},"Customer Record"),
+      h("div",{class:"name"},"Teresa Canopy"),
+      h("div",{class:"biz"},"Local Engravers Ltd.")
+    ),
+    h("div",{class:"info-grid"},
+      ...["Role:Business Owner","Reason for call:Accounting Solution","Current solution:Excel","Phone:"+PHONE].map(f=>{
+        const[l,v]=f.split(":");
+        return h("div",{class:"info-field"},h("label",null,l),h("span",null,v));
+      }),
+      h("div",{class:"info-field full"},h("label",null,"Email"),h("span",null,"teresacanopy@localengravers.co.uk"))
+    )
+  );
+}
+
+function keypad(){
+  const isOk=keyDigits===PHONE_CLEAN;
+  const wrap=h("div",null);
+  const disp=h("div",{class:"keypad-display"+(isOk?" correct":"")+(keyWrong?" wrong":"")});
+  if(keyDigits){disp.textContent=fmtPhone(keyDigits);}
+  else{disp.style.color="#94a3b8";disp.style.fontSize="13px";disp.style.letterSpacing="0";disp.textContent="Enter number...";}
+  wrap.appendChild(disp);
+  const grid=h("div",{class:"key-grid"});
+  ["1","2","3","4","5","6","7","8","9","*","0","#"].forEach(k=>{
+    grid.appendChild(h("button",{class:"key-btn",onclick:()=>{if(keyDigits.length<11){keyDigits+=k;keyWrong=false;render();}}},k));
+  });
+  wrap.appendChild(grid);
+  wrap.appendChild(h("div",{class:"dial-row"},
+    h("button",{class:"del-btn",onclick:()=>{keyDigits=keyDigits.slice(0,-1);render();}},"⌫ Delete"),
+    h("button",{class:"dial-btn "+(isOk?"ready":"not-ready"),onclick:()=>{
+      if(!isOk){if(keyDigits.length===11){keyWrong=true;render();setTimeout(()=>{keyWrong=false;render();},500);}return;}
+      phase="ringing";render();
+      setTimeout(()=>{messages=[{role:"assistant",content:"Hello?"}];phase="chat";render();},3000);
+    }},"📞 Dial")
+  ));
+  if(keyWrong)wrap.appendChild(h("p",{style:"font-size:12px;color:#991b1b;text-align:center;margin-top:6px"},"That number doesn't match the customer record. Check the info card and try again."));
+  return wrap;
+}
+
+function buildPhase(){
+  if(phase==="apikey"){
+    let keyInput="";
+    const inp=h("input",{type:"password",placeholder:"sk-ant-...",style:"width:100%;padding:11px 13px;font-size:13px;border-radius:10px;border:1.5px solid #e2e8f0;outline:none;font-family:inherit;margin-bottom:8px;display:block"});
+    inp.addEventListener("input",e=>{keyInput=e.target.value;});
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter")save();});
+    const err=h("div",{style:"display:none;font-size:12px;color:#991b1b;margin-bottom:8px"});
+    function save(){
+      const k=keyInput.trim();
+      if(!k.startsWith("sk-ant-")){err.style.display="block";err.textContent="That doesn't look right - Anthropic keys start with sk-ant-";return;}
+      apiKey=k;localStorage.setItem("qb_rp_apikey",k);phase="intro";render();
+    }
+    return h("div",{class:"page",style:"padding-top:3.5rem"},
+      h("div",{style:"max-width:380px;margin:0 auto"},
+        h("div",{style:"font-size:2rem;margin-bottom:1rem;text-align:center"},"🔑"),
+        h("h1",{style:"text-align:center;margin-bottom:.5rem"},"API key needed"),
+        h("p",{style:"text-align:center;margin-bottom:1.75rem"},"This simulation calls the Anthropic API directly. Paste your key below - it stays in your browser only and is never sent anywhere else."),
+        inp,
+        err,
+        h("button",{class:"btn btn-primary btn-full",onclick:save},"Continue →"),
+        h("p",{style:"font-size:12px;color:#94a3b8;text-align:center;margin-top:12px"},"Your key is saved in localStorage so you won't need to re-enter it. Clear browser data to remove it.")
+      )
+    );
+  }
+  if(phase==="intro"){
+    const ta=h("textarea",{placeholder:"Paste your transcript here...",rows:"7",style:"margin-bottom:8px"});
+    ta.value=pastedTranscript;ta.addEventListener("input",e=>{pastedTranscript=e.target.value;});
+    return h("div",{class:"page"},
+      h("div",{class:"overline",style:"margin-bottom:6px"},"Performance Skill Check 1B"),
+      h("h1",null,"Outbound role play simulation"),
+      h("p",{style:"margin-bottom:1.25rem"},"You'll play the role of a QuickBooks sales consultant. The AI plays Teresa Canopy, owner of Local Engravers Ltd., who recently enquired about accounting solutions."),
+      infoCard(),
+      h("div",{class:"card"},h("div",{class:"card-body"},
+        h("div",{style:"font-size:13px;font-weight:600;margin-bottom:8px;color:#1e293b"},"You will be scored on"),
+        h("div",{class:"badge-row"},
+          ...["Introduction","Discovery","Proof of Concept","Progress the Deal"].map(s=>h("span",{class:"dot-badge"},h("span",{class:"dot"}),s))
+        ),
+        h("div",{style:"font-size:12px;color:#94a3b8;margin-top:8px"},"16 criteria · 48 points maximum")
+      )),
+      h("div",{class:"alert alert-info",style:"margin-bottom:1.25rem"},
+        h("strong",{style:"font-weight:600"},"Prefer to speak?")," Use Windows + H on PC or F5 on Mac to dictate into the chat."
+      ),
+      h("div",{class:"card"},h("div",{class:"card-body"},
+        h("div",{style:"font-size:14px;font-weight:600;margin-bottom:4px;color:#1e293b"},"Dial to begin"),
+        h("p",{style:"margin-bottom:1rem"},"Enter Teresa's phone number from the customer record above, then press Dial."),
+        keypad()
+      )),
+      h("div",{class:"divider"}),
+      h("div",{style:"font-size:14px;font-weight:600;margin-bottom:4px;color:#1e293b"},"Already have a transcript?"),
+      h("p",{style:"margin-bottom:.75rem"},"Paste a call transcript below to score it using the same rubric."),
+      h("div",{class:"alert alert-warn",style:"margin-bottom:.75rem;font-size:12px"},"Only use this if scoring failed after completing the simulation above."),
+      ta,
+      h("button",{class:"btn btn-primary btn-full",onclick:()=>{if(!pastedTranscript.trim())return;runScoring(pastedTranscript.trim());}},"Score this transcript →")
+    );
+  }
+
+  if(phase==="ringing"){
+    return h("div",{class:"page"},
+      h("div",{class:"ring-wrap"},
+        h("div",{class:"ring-avatar"},
+          h("div",{class:"ring-pulse"}),h("div",{class:"ring-pulse"}),h("div",{class:"ring-pulse"}),"📞"
+        ),
+        h("div",{style:"font-size:17px;font-weight:600;margin-bottom:6px;color:#0f172a"},"Calling Teresa Canopy..."),
+        h("div",{style:"font-size:14px;color:#64748b;margin-bottom:4px"},PHONE),
+        h("div",{style:"font-size:13px;color:#94a3b8"},"Ringing...")
+      )
+    );
+  }
+
+  if(phase==="chat"){
+    const msgList=h("div",{class:"msgs",id:"msglist"});
+    messages.forEach(m=>{
+      msgList.appendChild(h("div",{class:"msg-row fadein "+(m.role==="user"?"user":"")},
+        h("div",{class:"bubble "+(m.role==="user"?"user":"assistant")},
+          h("div",{class:"bubble-label"},m.role==="user"?"You (Consultant)":"Teresa (Customer)"),
+          m.content
+        )
+      ));
+    });
+    if(loading){
+      msgList.appendChild(h("div",{class:"msg-row fadein"},
+        h("div",{class:"bubble assistant"},
+          h("div",{class:"bubble-label"},"Teresa (Customer)"),
+          h("span",{class:"typing-dot"}),h("span",{class:"typing-dot"}),h("span",{class:"typing-dot"})
+        )
+      ));
+    }
+    const taEl=h("textarea",{placeholder:"Type your response... (Enter to send)",rows:"2",style:"flex:1"});
+    taEl.value=inputVal;
+    taEl.addEventListener("input",e=>{inputVal=e.target.value;});
+    taEl.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText(inputVal);}});
+    const sendBtn=h("button",{class:"btn btn-primary",style:"align-self:stretch;padding:0 18px",onclick:()=>sendText(inputVal)},"Send");
+    if(loading||!inputVal.trim())sendBtn.disabled=true;
+
+    const transcriptBlock=showTranscript?h("div",{class:"card",style:"margin-top:.625rem"},
+      h("div",{style:"background:#eff6ff;padding:10px 14px;border-bottom:1px solid #bfdbfe"},
+        h("div",{style:"font-size:13px;font-weight:600;color:#1e40af;margin-bottom:2px"},"Your transcript"),
+        h("div",{style:"font-size:12px;color:#3b82f6;margin-bottom:8px"},"Click inside to select all, then copy and paste into your Google Doc."),
+        h("a",{class:"btn btn-sm btn-primary",href:"https://docs.google.com/document/d/1EBbo9slCB-sLSUTUX2DyhNvWoBLdyjl0q8s92Qw5J9Y/copy",target:"_blank",style:"text-decoration:none"},"Make a copy of results doc →")
+      ),
+      (()=>{const t=h("textarea",{rows:"5",style:"border:none;resize:none;border-radius:0;font-family:monospace;font-size:12px"});t.readOnly=true;t.value=getTx();t.addEventListener("click",e=>e.target.select());return t;})()
+    ):null;
+
+    return h("div",{class:"page"},
+      h("div",{class:"chat-wrap"},
+        h("div",{class:"chat-header"},
+          h("div",null,
+            h("div",{class:"cname"},"Teresa Canopy - Local Engravers Ltd."),
+            h("div",{class:"csub"},"Outbound call · "+PHONE)
+          ),
+          h("span",{class:"conn-pill"},"● Connected")
+        ),
+        h("div",{class:"info-strip"},
+          ...["Role:Business Owner","Reason:Accounting Solution","Solution:Excel","Email:teresacanopy@localengravers.co.uk"].map(f=>{
+            const[l,v]=f.split(":");
+            return h("div",null,h("span",{style:"color:#94a3b8;font-weight:600"},l+" "),v);
+          })
+        ),
+        msgList,
+        h("div",{class:"alert alert-warn",style:"margin-top:.625rem;font-size:12px"},
+          "Save your transcript before ending. Click ",h("strong",null,"Save transcript")," below, then copy it into a Google Doc."
+        ),
+        h("div",{class:"input-row"},taEl,sendBtn),
+        transcriptBlock,
+        confirmEnd?h("div",{class:"alert alert-danger",style:"margin-top:.5rem"},"Did you save your transcript? Click ",h("strong",null,"Yes, end & score")," to continue."):null,
+        h("div",{style:"display:flex;gap:8px;margin-top:.5rem"},
+          h("button",{class:"btn"+(messages.length===0?" disabled":""),style:"flex:1",onclick:()=>{if(messages.length===0)return;showTranscript=!showTranscript;render();}},showTranscript?"Hide transcript":"Save transcript"),
+          !confirmEnd
+            ?h("button",{class:"btn btn-danger",style:"flex:2",onclick:()=>{confirmEnd=true;render();}},"End call & score →")
+            :h("button",{class:"btn btn-danger",style:"flex:2",onclick:endAndScore},"Yes, end & score →")
+        )
+      )
+    );
+  }
+
+  if(phase==="scoring"){
+    const fill=h("div",{style:"height:4px;background:#236CFF;border-radius:99px;width:0;transition:width 14s linear"});
+    const div=h("div",{class:"page",style:"text-align:center;padding-top:3.5rem"},
+      h("div",{style:"font-size:2.5rem;margin-bottom:1rem"},"📋"),
+      h("div",{style:"font-size:18px;font-weight:600;margin-bottom:.5rem;color:#0f172a"},"Scoring your call..."),
+      h("p",{style:"max-width:40ch;margin:0 auto 2rem"},"Your coach is reviewing the transcript against the full scorecard rubric. This usually takes about 15 seconds."),
+      h("div",{style:"height:4px;background:#e2e8f0;border-radius:99px;max-width:320px;margin:0 auto;overflow:hidden"},fill)
+    );
+    setTimeout(()=>{fill.style.width="90%";},50);
+    return div;
+  }
+
+  if(phase==="results"&&scoreData){
+    if(scoreData.error)return h("div",{class:"page",style:"text-align:center;padding-top:3rem"},
+      h("div",{style:"font-size:2rem;margin-bottom:1rem"},"⚠️"),
+      h("div",{style:"font-size:16px;font-weight:600;margin-bottom:.5rem;color:#0f172a"},"Scoring failed"),
+      h("p",{style:"max-width:40ch;margin:0 auto"},"If you saved your transcript, share it with your facilitator and note that scoring failed.")
+    );
+
+    const grand=scoreData.grand_total||0;
+    const overall=grand<=21?"Does Not Meet Expectations":grand<=32?"Meets Expectations":"Exceeds Expectations";
+    const oc=overall==="Does Not Meet Expectations"?{bg:"#fef2f2",color:"#991b1b"}:overall==="Meets Expectations"?{bg:"#fffbeb",color:"#92400e"}:{bg:"#f0fdf4",color:"#166534"};
+
+    const rTxt="PERFORMANCE SKILL CHECK 1B - RESULTS\nOutbound New Hire | Teresa Canopy / Local Engravers Ltd.\n\nOVERALL: "+overall+" ("+grand+"/48)\n\nSCORECARD\n"+
+      CRITERIA.map(c=>{const s=scoreData.scores?.[c.key]||0;return c.seg+" | "+c.label+": "+SL[s]+" ("+s+"/3)";}).join("\n")+
+      "\n\nSTRENGTHS\n"+(scoreData.strengths||[]).map((s,i)=>(i+1)+". "+s).join("\n")+
+      "\n\nOPPORTUNITIES\n"+(scoreData.opportunities||[]).map((s,i)=>(i+1)+". "+s).join("\n")+
+      "\n\nCOACHING SUMMARY\n"+(scoreData.coaching_summary||"")+
+      "\n\nTRANSCRIPT\n"+(scoreData.transcript||"");
+
+    const copyBtn=h("button",{class:"btn btn-sm btn-primary",style:"margin-bottom:8px;width:100%",onclick:async()=>{
+      try{await navigator.clipboard.writeText(rTxt);copyBtn.textContent="✓ Copied!";copyBtn.className="btn btn-sm btn-success";copyBtn.style.marginBottom="8px";copyBtn.style.width="100%";setTimeout(()=>{copyBtn.textContent="Copy results";copyBtn.className="btn btn-sm btn-primary";copyBtn.style.marginBottom="8px";copyBtn.style.width="100%";},2000);}catch(e){}
+    }},"Copy results");
+
+    const panels=SEGS.map((seg,si)=>{
+      const sc=CRITERIA.filter(c=>seg.keys.includes(c.key));
+      const earned=sc.reduce((s,c)=>s+(scoreData.scores?.[c.key]||0),0);
+      const pct=Math.round((earned/seg.max)*100);
+      const bc=pct>=75?"#16a34a":pct>=40?"#d97706":"#dc2626";
+      const fill=h("div",{class:"prog-fill",style:"width:0;background:"+bc});
+      const panel=h("div",{class:"score-panel fadein",style:"animation-delay:"+(si*.07)+"s"},
+        h("div",{class:"score-panel-header"},h("span",{class:"seg-name"},seg.name),h("span",{class:"seg-pts"},earned+" / "+seg.max)),
+        h("div",{class:"prog-track"},fill),
+        ...sc.map(c=>{const s=scoreData.scores?.[c.key]||0;return h("div",{class:"score-row"},h("span",null,c.label),h("span",{class:"badge b"+s},SL[s]));})
+      );
+      setTimeout(()=>{fill.style.transition="width 1s cubic-bezier(.16,1,.3,1)";fill.style.width=pct+"%";},100+si*70);
+      return panel;
+    });
+
+    return h("div",{class:"page"},
+      h("div",{class:"overline",style:"margin-bottom:6px"},"Performance Skill Check 1B"),
+      h("h1",null,"Your results"),
+      h("div",{class:"overall-badge stamp",style:"background:"+oc.bg+";color:"+oc.color},
+        h("div",null,
+          h("div",{style:"font-size:19px;font-weight:700"},overall),
+          h("div",{style:"font-size:13px;opacity:.7;margin-top:2px"},"Total: "+grand+" / 48 points")
+        ),
+        h("div",{style:"font-size:2rem;opacity:.5"},overall==="Exceeds Expectations"?"🏆":overall==="Meets Expectations"?"👍":"📚")
+      ),
+      ...panels,
+      h("div",{class:"card"},h("div",{class:"card-body"},
+        h("div",{style:"font-size:14px;font-weight:600;margin-bottom:14px;color:#0f172a"},"Coaching feedback"),
+        h("div",{style:"font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px"},"Strengths"),
+        ...(scoreData.strengths||[]).map(s=>h("div",{class:"coaching-item"},h("span",{style:"color:#16a34a;font-weight:700;flex-shrink:0"},"✓"),s)),
+        h("div",{style:"font-size:11px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.08em;margin:12px 0 8px"},"Growth opportunities"),
+        ...(scoreData.opportunities||[]).map(s=>h("div",{class:"coaching-item"},h("span",{style:"color:#d97706;font-weight:700;flex-shrink:0"},"↗"),s)),
+        h("div",{style:"font-size:13px;line-height:1.7;color:#64748b;font-style:italic;background:#f8fafc;padding:12px 14px;border-radius:10px;margin-top:12px"},"“"+(scoreData.coaching_summary||"")+"”")
+      )),
+      h("div",{class:"divider"}),
+      h("div",{class:"overline",style:"margin-bottom:14px"},"Complete your assessment"),
+      h("div",{class:"step-card"},
+        h("div",{class:"step-header",style:"background:#eff6ff;border-bottom-color:#bfdbfe"},
+          h("div",{class:"step-num",style:"background:#236CFF;color:#fff"},"1"),
+          h("div",{style:"font-size:14px;font-weight:600;color:#1e40af"},"Save your results")
+        ),
+        h("div",{class:"step-body"},
+          h("p",{style:"margin-bottom:12px"},"Copy your full results and paste into the Google Doc you made during the transcript step."),
+          copyBtn,
+          (()=>{const t=h("textarea",{rows:"8",style:"font-family:monospace;font-size:12px;margin-bottom:8px"});t.readOnly=true;t.value=rTxt;t.addEventListener("click",e=>e.target.select());return t;})(),
+          h("div",{class:"alert alert-warn",style:"font-size:12px"},"Paste into the Google Doc you already made during the transcript step.")
+        )
+      ),
+      h("div",{class:"step-card"},
+        h("div",{class:"step-header",style:"background:#f0fdf4;border-bottom-color:#86efac"},
+          h("div",{class:"step-num",style:"background:#16a34a;color:#fff"},"2"),
+          h("div",{style:"font-size:14px;font-weight:600;color:#166534"},"Record your Salesforce workflow in Zoom")
+        ),
+        h("div",{class:"step-body"},
+          h("div",{class:"alert alert-danger",style:"font-size:12px;font-weight:600;margin-bottom:10px"},"You MUST record this meeting and SHARE YOUR SCREEN the entire time."),
+          h("p",{style:"margin-bottom:10px"},"Record yourself completing the full end-to-end process for Teresa Canopy:"),
+          ...ZOOM_STEPS.map((s,i)=>h("div",{class:"zoom-step"},h("div",{class:"zoom-num"},i+1),h("div",null,s))),
+          h("a",{class:"btn btn-success btn-full",href:"https://intuit.zoom.us/meeting#/upcoming",target:"_blank",style:"margin-top:10px;text-decoration:none"},"Open Zoom →")
+        )
+      ),
+      h("div",{class:"step-card",style:"border-color:#93c5fd"},
+        h("div",{class:"step-header",style:"background:#00254A"},
+          h("div",{class:"step-num",style:"background:#fff;color:#00254A"},"3"),
+          h("div",{style:"font-size:14px;font-weight:600;color:#fff"},"Submit to complete your assessment")
+        ),
+        h("div",{class:"step-body"},
+          h("p",{style:"margin-bottom:12px"},"Once you have your saved results and your Zoom recording link, click below to open the submission form."),
+          h("a",{class:"btn btn-primary btn-full",href:"https://forms.gle/XYWdZDFuSfovPudV7",target:"_blank",style:"text-decoration:none"},"Submit to Google Form →")
+        )
+      ),
+      h("div",{style:"margin-top:1rem"},
+        !confirmRestart
+          ?h("button",{class:"btn btn-full",onclick:()=>{confirmRestart=true;render();}},"Try again")
+          :h("div",null,
+            h("div",{class:"alert alert-danger",style:"margin-bottom:8px"},h("strong",null,"Are you sure?")," Your transcript and results will be gone. Make sure you've saved everything first."),
+            h("div",{style:"display:flex;gap:8px"},
+              h("button",{class:"btn",style:"flex:1",onclick:()=>{confirmRestart=false;render();}},"Go back"),
+              h("button",{class:"btn btn-danger",style:"flex:2",onclick:resetAll},"Yes, start over →")
+            )
+          )
+      )
+    );
+  }
+  return h("div",null);
+}
+
+function getTx(){return messages.map(m=>(m.role==="user"?"CONSULTANT":"TERESA (Customer)")+":\n"+m.content).join("\n\n");}
+
+async function sendText(text){
+  if(!text.trim()||loading)return;
+  messages=[...messages,{role:"user",content:text}];
+  inputVal="";loading=true;render();
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-allow-browser":"true"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:SYSTEM_PROMPT,messages:messages.map(m=>({role:m.role,content:m.content}))})
+    });
+    const data=await res.json();
+    const reply=data.content?.find(b=>b.type==="text")?.text||"...";
+    messages=[...messages,{role:"assistant",content:reply}];
+  }catch(e){messages=[...messages,{role:"assistant",content:"(Connection error - please try again)"}];}
+  loading=false;render();
+  setTimeout(()=>{const ml=document.getElementById("msglist");if(ml)ml.scrollTop=ml.scrollHeight;},50);
+}
+
+async function runScoring(transcript){
+  phase="scoring";render();
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-allow-browser":"true"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:SCORE_PROMPT+transcript}]})
+    });
+    const data=await res.json();
+    const raw=data.content?.find(b=>b.type==="text")?.text||"";
+    const m=raw.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error("no json");
+    const parsed=JSON.parse(m[0]);
+    const s=parsed.scores||{};
+    const it=(s.build_rapport||0)+(s.set_agenda||0)+(s.role_clarification||0)+(s.upfront_contract||0);
+    const dt=(s.transition_insight||0)+(s.open_questions||0)+(s.probing_questions||0)+(s.confirming_questions||0)+(s.platform_positioning||0)+(s.active_listening||0);
+    const pt=s.customer_story||0;
+    const pr=(s.objection_handling||0)+(s.recap_validate||0)+(s.revisit_upfront||0)+(s.next_steps||0)+(s.confirmed_commitment||0);
+    scoreData={...parsed,intro_total:it,discovery_total:dt,poc_total:pt,progress_total:pr,grand_total:it+dt+pt+pr,transcript};
+    phase="results";
+  }catch(e){scoreData={error:true};phase="results";}
+  render();
+}
+
+function endAndScore(){
+  const tx=messages.map(m=>(m.role==="user"?"CONSULTANT":"TERESA (Customer)")+": "+m.content).join("\n\n");
+  runScoring(tx);
+}
+
+function resetAll(){
+  phase="intro";messages=[];inputVal="";loading=false;scoreData=null;
+  showTranscript=false;confirmEnd=false;showResultsText=false;confirmRestart=false;
+  pastedTranscript="";keyDigits="";keyWrong=false;render();
+}
+
+render();
+</script>
+</body>
+</html>
