@@ -3,599 +3,1364 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Performance Skill Check 1B - Role Play Simulation</title>
+<title>Teresa Canopy Role Play - EMEA Sales Simulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:15px;color:#1a1a2e;background:#f8f9fc;line-height:1.5;-webkit-font-smoothing:antialiased}
-.page{max-width:620px;margin:0 auto;padding:2rem 1.25rem 4rem}
-.overline{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#64748b}
-h1{font-size:21px;font-weight:600;margin:.375rem 0 .75rem;color:#0f172a}
-p{color:#64748b;font-size:14px;line-height:1.65}
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.card-body{padding:1.125rem 1.25rem}
-.info-header{background:#00254A;padding:14px 20px}
-.info-header .badge{font-size:10px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.info-header .name{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
-.info-header .biz{font-size:13px;color:rgba(255,255,255,.6)}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;padding:14px 20px;background:#fff}
-.info-field label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:3px}
-.info-field span{font-size:13px;color:#1e293b;font-weight:500}
-.info-field.full{grid-column:1/-1}
-.info-field.full span{font-weight:400;color:#64748b}
-.badge-row{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:.5rem}
-.dot-badge{display:flex;align-items:center;gap:5px;font-size:13px;color:#64748b}
-.dot{width:5px;height:5px;border-radius:50%;background:#236CFF;flex-shrink:0}
-.score-panel{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:.875rem;background:#fff}
-.score-panel-header{background:#f8fafc;padding:10px 16px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
-.seg-name{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.07em}
-.seg-pts{font-size:12px;color:#94a3b8;font-variant-numeric:tabular-nums}
-.prog-track{height:3px;background:#f1f5f9}
-.prog-fill{height:100%;transition:width 1s cubic-bezier(.16,1,.3,1)}
-.score-row{padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f1f5f9;font-size:13px;color:#334155;transition:background .12s}
-.score-row:last-child{border-bottom:none}
-.score-row:hover{background:#f8fafc}
-.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap;margin-left:10px;border:1px solid}
-.b0{background:#fef2f2;color:#991b1b;border-color:#fca5a5}
-.b1{background:#fffbeb;color:#92400e;border-color:#fcd34d}
-.b2{background:#f0fdf4;color:#166534;border-color:#86efac}
-.b3{background:#eff6ff;color:#1e40af;border-color:#93c5fd}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;font-size:13px;font-weight:600;border-radius:10px;border:1px solid #e2e8f0;background:#fff;color:#334155;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .15s;user-select:none}
-.btn:hover{background:#f8fafc;border-color:#cbd5e1}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:#236CFF;border-color:#236CFF;color:#fff;box-shadow:0 2px 8px rgba(35,108,255,.25)}
-.btn-primary:hover{background:#1a5de8;border-color:#1a5de8;box-shadow:0 4px 12px rgba(35,108,255,.3)}
-.btn-danger{background:#dc2626;border-color:#dc2626;color:#fff}
-.btn-danger:hover{background:#b91c1c}
-.btn-success{background:#16a34a;border-color:#16a34a;color:#fff}
-.btn-success:hover{background:#15803d}
-.btn-navy{background:#00254A;border-color:#00254A;color:#fff}
-.btn-navy:hover{background:#001f3d}
-.btn-full{width:100%}
-.btn-sm{padding:6px 12px;font-size:12px}
-.btn:disabled,.btn.disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none}
-.alert{padding:11px 15px;border-radius:10px;font-size:13px;line-height:1.6;border:1px solid}
-.alert-warn{background:#fffbeb;border-color:#fcd34d;color:#92400e}
-.alert-danger{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
-.alert-info{background:#eff6ff;border-color:#93c5fd;color:#1e40af}
-textarea{width:100%;resize:vertical;padding:11px 13px;font-size:13px;border-radius:10px;border:1px solid #e2e8f0;background:#fff;color:#1e293b;line-height:1.6;font-family:inherit;outline:none;display:block;transition:border-color .2s,box-shadow .2s}
-textarea:focus{border-color:#236CFF;box-shadow:0 0 0 3px rgba(35,108,255,.12)}
-.divider{height:1px;background:#e2e8f0;margin:1.5rem 0}
-.keypad-display{width:100%;padding:13px 18px;font-size:22px;font-weight:300;letter-spacing:.12em;text-align:center;background:#fff;border:1.5px solid #e2e8f0;border-radius:11px;min-height:54px;color:#1e293b;transition:border-color .2s,color .2s,background .2s;font-variant-numeric:tabular-nums}
-.keypad-display.correct{border-color:#16a34a;color:#166534;background:#f0fdf4}
-.keypad-display.wrong{border-color:#dc2626;animation:shake .35s ease}
-.key-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:.625rem 0}
-.key-btn{padding:15px 0;font-size:17px;font-weight:400;border-radius:10px;border:1px solid #e2e8f0;background:#f8fafc;color:#1e293b;cursor:pointer;font-family:inherit;transition:background .1s,transform .1s,border-color .1s}
-.key-btn:hover{background:#fff;border-color:#cbd5e1}
-.key-btn:active{transform:scale(.93);background:#f1f5f9}
-.dial-row{display:flex;gap:8px}
-.del-btn{flex:1;padding:13px;font-size:13px;border-radius:10px;border:1px solid #e2e8f0;background:#f8fafc;color:#64748b;cursor:pointer;font-family:inherit;transition:background .1s}
-.del-btn:hover{background:#fff;border-color:#cbd5e1}
-.dial-btn{flex:2;padding:13px;font-size:14px;font-weight:600;border-radius:10px;border:none;color:#fff;cursor:pointer;font-family:inherit;transition:transform .15s,background .15s,box-shadow .15s}
-.dial-btn.ready{background:#16a34a;box-shadow:0 2px 8px rgba(22,163,74,.3)}
-.dial-btn.ready:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.35)}
-.dial-btn.not-ready{background:#cbd5e1;cursor:not-allowed}
-.ring-wrap{text-align:center;padding:4rem 1rem}
-.ring-avatar{width:76px;height:76px;border-radius:50%;background:#00254A;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.75rem;position:relative}
-.ring-pulse{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(0,37,74,.5);animation:ring-pulse 1.8s ease-out infinite}
-.ring-pulse:nth-child(2){animation-delay:.6s}
-.ring-pulse:nth-child(3){animation-delay:1.2s}
-.chat-wrap{display:flex;flex-direction:column}
-.chat-header{padding:10px 0 10px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
-.chat-header .cname{font-size:14px;font-weight:600;color:#0f172a}
-.chat-header .csub{font-size:12px;color:#94a3b8}
-.conn-pill{font-size:11px;padding:4px 10px;border-radius:99px;background:#f0fdf4;color:#166534;font-weight:600;border:1px solid #86efac}
-.info-strip{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 13px;display:flex;flex-wrap:wrap;gap:4px 18px;margin-bottom:.75rem;font-size:12px}
-.msgs{display:flex;flex-direction:column;gap:9px;min-height:220px;padding-bottom:.5rem;overflow-y:auto;max-height:360px}
-.msg-row{display:flex}
-.msg-row.user{justify-content:flex-end}
-.bubble{max-width:78%;border-radius:16px;padding:10px 14px;font-size:13px;line-height:1.6;border:1px solid transparent}
-.bubble.user{background:#236CFF;color:#fff;border-radius:16px 16px 4px 16px}
-.bubble.assistant{background:#f8fafc;color:#1e293b;border-color:#e2e8f0;border-radius:16px 16px 16px 4px}
-.bubble-label{font-size:11px;font-weight:600;opacity:.6;margin-bottom:3px}
-.typing-dot{width:6px;height:6px;border-radius:50%;background:#94a3b8;display:inline-block;margin-right:3px;animation:tpulse 1.4s ease-in-out infinite}
-.typing-dot:nth-child(2){animation-delay:.2s}
-.typing-dot:nth-child(3){animation-delay:.4s;margin-right:0}
-.input-row{display:flex;gap:8px;margin-top:.5rem}
-.input-row textarea{flex:1;min-height:62px}
-.overall-badge{padding:18px 22px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-.step-card{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:.875rem;background:#fff}
-.step-header{padding:13px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #e2e8f0}
-.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.step-body{padding:16px 18px}
-.zoom-step{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px;font-size:13px;line-height:1.6;color:#334155}
-.zoom-num{width:21px;height:21px;border-radius:50%;border:1.5px solid #86efac;color:#166534;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
-.coaching-item{font-size:13px;line-height:1.6;padding:8px 0;border-bottom:1px solid #f1f5f9;display:flex;gap:9px;color:#334155}
-.coaching-item:last-child{border-bottom:none}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
-@keyframes ring-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
-@keyframes tpulse{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
-@keyframes fadein{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-@keyframes stamp{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-@keyframes scoring-p{from{width:0}to{width:90%}}
-.fadein{animation:fadein .3s cubic-bezier(.16,1,.3,1) both}
-.stamp{animation:stamp .45s cubic-bezier(.16,1,.3,1) both}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  font-family: 'AvenirNext forINTUIT W05 Demi', 'AvenirNext forINTUIT W05 Rg', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root {
+  --blue: #236CFF;
+  --navy: #00254A;
+  --navy-mid: #0a3a6b;
+  --agave: #81F2FE;
+  --agave-light: #C2F5FF;
+  --honey: #F9C741;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --amber: #d97706;
+  --red: #dc2626;
+  --surface: #f4f6fb;
+  --surface-chat: #eef1f8;
+  --surface-dial: #fafcff;
+  --blue-tint: #f0f6ff;
+  --blue-tint-active: #e6f0ff;
+  --border: #e4e8f0;
+  --text: #1a2840;
+  --text-soft: #5a6a85;
+  --text-muted: #8a98b0;
+}
+
+body {
+  background: var(--surface);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Header ── */
+header {
+  width: 100%;
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.header-badge {
+  background: var(--blue);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+header .logo {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: rgba(255,255,255,0.92);
+}
+
+/* ── Container ── */
+.container { width: 100%; max-width: 600px; margin: 28px auto; padding: 0 16px 56px; }
+
+/* ── Keypad screen ── */
+#keypad-screen {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,37,74,0.10), 0 1px 4px rgba(0,37,74,0.06);
+}
+
+.contact-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 28px 28px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, #4a8fff 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+  letter-spacing: -0.5px;
+}
+.contact-info { flex: 1; }
+.contact-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.contact-detail { font-size: 13px; color: rgba(255,255,255,0.6); }
+.contact-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+  background: rgba(129,242,254,0.18); color: var(--agave);
+  padding: 4px 10px; border-radius: 100px;
+  border: 1px solid rgba(129,242,254,0.25);
+}
+
+.keypad-body { padding: 24px 24px 28px; }
+
+.scene-desc {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin-bottom: 22px;
+  line-height: 1.6;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-radius: 10px;
+  border-left: 3px solid var(--blue);
+}
+
+.name-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 7px;
+}
+.name-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.name-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(35,108,255,0.1);
+}
+
+.hint-number {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 20px 0 10px;
+  letter-spacing: 0.2px;
+}
+.hint-number span {
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.dial-display {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 5px;
+  min-height: 58px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+.dial-display.has-digits { border-color: var(--blue); background: var(--surface-dial); }
+.dial-display .cursor {
+  display: inline-block;
+  width: 2px; height: 26px;
+  background: var(--blue);
+  animation: blink 1s steps(1) infinite;
+  margin-left: 3px;
+  border-radius: 1px;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.key-btn {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  width: min(68px, 28vw); height: min(68px, 28vw);
+  margin: 0 auto;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease-out, border-color 0.18s ease-out, transform 0.12s ease-out, box-shadow 0.18s ease-out;
+  box-shadow: 0 2px 6px rgba(0,37,74,0.07);
+  user-select: none;
+}
+.key-btn:hover {
+  background: var(--blue-tint);
+  border-color: var(--blue);
+  box-shadow: 0 4px 14px rgba(35,108,255,0.16);
+}
+.key-btn:active { transform: scale(0.93); background: var(--blue-tint-active); }
+.key-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.key-btn .key-letters { font-size: 8px; font-weight: 600; color: var(--text-muted); letter-spacing: 1.2px; margin-top: 1px; }
+
+.keypad-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 0; }
+.backspace-btn {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out;
+  font-weight: 600;
+}
+.backspace-btn:hover { background: #fff5f5; border-color: var(--red); color: var(--red); }
+.backspace-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.call-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease-out, max-height 0.4s ease-out, box-shadow 0.22s ease-out, transform 0.15s ease-out;
+  box-shadow: 0 4px 18px rgba(22,163,74,0.38);
+}
+.call-btn.visible { opacity: 1; pointer-events: auto; max-height: 60px; }
+.call-btn:hover {
+  background: linear-gradient(135deg, #4ade80 0%, #15803d 100%);
+  box-shadow: 0 6px 22px rgba(22,163,74,0.48);
+  transform: translateY(-1px);
+}
+.call-btn:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(22,163,74,0.28); }
+.call-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ── Ringing screen ── */
+#ringing-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,37,74,0.10);
+  min-height: 320px;
+}
+.ring-container { position: relative; width: 120px; height: 120px; margin: 0 auto 28px; }
+.ring-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  animation: ring-pulse 1.8s ease-out infinite;
+}
+.ring-circle:nth-child(1) { width: 80px; height: 80px; top: 20px; left: 20px; animation-delay: 0s; }
+.ring-circle:nth-child(2) { width: 100px; height: 100px; top: 10px; left: 10px; animation-delay: 0.35s; }
+.ring-circle:nth-child(3) { width: 120px; height: 120px; top: 0; left: 0; animation-delay: 0.7s; }
+@keyframes ring-pulse { 0% { opacity: 0.7; transform: scale(0.93); } 100% { opacity: 0; transform: scale(1.12); } }
+.phone-icon-center {
+  position: absolute;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #22c55e, var(--green));
+  border-radius: 50%;
+  top: 20px; left: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px;
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(22,163,74,0.35);
+}
+.ringing-label { font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 6px; text-align: center; }
+.ringing-number { font-size: 13px; color: var(--text-muted); text-align: center; letter-spacing: 2.5px; }
+
+/* ── Conversation screen ── */
+#conversation-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  flex-direction: column;
+  background: var(--surface-chat);
+}
+
+/* topbar */
+.conv-topbar {
+  flex-shrink: 0;
+  background: var(--navy);
+  padding: 12px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.topbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topbar-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.topbar-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800; color: #fff;
+}
+.topbar-step {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+.track-indicator {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 600;
+}
+.track-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px; font-weight: 700;
+  transition: background 0.4s ease, color 0.4s ease;
+  background: rgba(22,163,74,0.2);
+  color: #6ee7a0;
+  border: 1px solid rgba(22,163,74,0.3);
+}
+.track-pill.ok { background: rgba(217,119,6,0.2); color: #fcd34d; border-color: rgba(217,119,6,0.3); }
+.track-pill.poor { background: rgba(220,38,38,0.2); color: #fca5a5; border-color: rgba(220,38,38,0.3); }
+.track-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.progress-track { background: rgba(255,255,255,0.12); border-radius: 100px; height: 3px; overflow: hidden; }
+.progress-fill { background: var(--agave); height: 100%; border-radius: 100px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+
+/* chat zone */
+.chat-zone {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* bubbles */
+.chat-bubble {
+  max-width: 80%;
+  padding: 11px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  animation: bubble-in 0.32s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.chat-bubble.user {
+  background: var(--blue);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 2px 10px rgba(35,108,255,0.28);
+}
+.chat-bubble.teresa-reaction,
+.chat-bubble.teresa-next {
+  background: #fff;
+  border: 1px solid rgba(0,37,74,0.08);
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+  color: var(--text);
+  box-shadow: 0 1px 6px rgba(0,37,74,0.07);
+}
+.bubble-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+.chat-bubble.user .bubble-label { color: rgba(255,255,255,0.6); }
+.chat-bubble.teresa-reaction .bubble-label,
+.chat-bubble.teresa-next .bubble-label { color: var(--text-muted); }
+
+/* typing */
+.typing-bubble {
+  background: #fff;
+  border: 1px solid rgba(0,37,74,0.08);
+  border-radius: 18px;
+  border-bottom-left-radius: 5px;
+  padding: 13px 18px;
+  align-self: flex-start;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  animation: bubble-in 0.32s cubic-bezier(.16,1,.3,1) both;
+  box-shadow: 0 1px 6px rgba(0,37,74,0.07);
+}
+.typing-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #c8d0df;
+  animation: typing-bounce 1.3s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); background: #c8d0df; }
+  30% { transform: translateY(-5px); background: #8a98b0; }
+}
+
+/* choices tray */
+.choices-tray {
+  flex-shrink: 0;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 16px 16px 20px;
+  box-shadow: 0 -6px 24px rgba(0,37,74,0.08);
+  max-height: 52vh;
+  overflow-y: auto;
+  transition: opacity 0.22s ease;
+}
+.choices-tray.fading { opacity: 0; pointer-events: none; }
+
+.step-prompt {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.choices-list { display: flex; flex-direction: column; gap: 8px; }
+.choice-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text);
+  font-family: inherit;
+  font-weight: 500;
+  width: 100%;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  position: relative;
+}
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.choice-btn:hover {
+  background: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 3px 12px rgba(35,108,255,0.12);
+  transform: translateX(2px);
+}
+.choice-btn:hover::before { opacity: 1; }
+.choice-btn:active { transform: translateX(1px) scale(0.995); }
+.choice-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+.choice-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* results */
+#results-screen { display: none; }
+.results-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  color: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,37,74,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.results-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.badge-exceeds { background: rgba(22,163,74,0.25); color: #6ee7a0; border: 1px solid rgba(22,163,74,0.35); }
+.badge-meets { background: rgba(35,108,255,0.25); color: #93c5fd; border: 1px solid rgba(35,108,255,0.35); }
+.badge-dnm { background: rgba(220,38,38,0.25); color: #fca5a5; border: 1px solid rgba(220,38,38,0.35); }
+.results-score-big { font-size: 56px; font-weight: 800; line-height: 1; margin-bottom: 4px; letter-spacing: -2px; }
+.results-score-label { font-size: 13px; opacity: 0.6; letter-spacing: 0.3px; }
+
+.segment-panel {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0,37,74,0.07);
+  border: 1px solid var(--border);
+}
+.segment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.segment-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.segment-score { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+.segment-bar-wrap {
+  background: var(--surface);
+  border-radius: 100px;
+  height: 6px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.segment-bar-fill {
+  background: linear-gradient(90deg, var(--blue) 0%, #4a8fff 100%);
+  height: 100%;
+  border-radius: 100px;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(.4,0,.2,1);
+}
+.criteria-list { display: flex; flex-direction: column; gap: 13px; }
+.criteria-item { display: flex; flex-direction: column; gap: 5px; }
+.criteria-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.criteria-name { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+.score-badge {
+  display: inline-block;
+  padding: 2px 11px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.score-badge.s0 { background: var(--red); }
+.score-badge.s1 { background: var(--amber); }
+.score-badge.s2 { background: var(--green); }
+.score-badge.s3 { background: var(--blue); }
+.criteria-feedback { font-size: 12.5px; color: var(--text-soft); line-height: 1.45; }
+
+.coaching-panel {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0,37,74,0.07);
+  border: 1px solid var(--border);
+}
+.coaching-panel h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.coaching-panel p { font-size: 14px; color: var(--text); line-height: 1.65; }
+.strengths-list, .growth-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 12px; }
+.strengths-list li { font-size: 14px; color: var(--text); padding-left: 20px; position: relative; }
+.strengths-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.growth-list li { font-size: 14px; color: var(--text); padding-left: 20px; position: relative; }
+.growth-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+
+.copy-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0,37,74,0.07);
+  border: 1px solid var(--border);
+}
+.copy-section h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.copy-textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 14px;
+  font-size: 12.5px;
+  font-family: inherit;
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 160px;
+  resize: vertical;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.copy-textarea:focus { border-color: var(--blue); }
+.copy-btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 11px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 4px 14px rgba(35,108,255,0.3);
+}
+.copy-btn:hover { background: #1a56d4; box-shadow: 0 6px 18px rgba(35,108,255,0.4); transform: translateY(-1px); }
+.copy-btn.copied { background: var(--green); box-shadow: 0 4px 14px rgba(22,163,74,0.35); }
+.restart-btn {
+  background: transparent;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  border-radius: 100px;
+  padding: 11px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  margin-left: 10px;
+}
+.restart-btn:hover { background: #f0f6ff; transform: translateY(-1px); }
+
+/* ── Briefing screen ── */
+#briefing-screen {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,37,74,0.10), 0 1px 4px rgba(0,37,74,0.06);
+}
+.briefing-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 32px 28px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.briefing-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--agave);
+  margin-bottom: 10px;
+}
+.briefing-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+.briefing-sub {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.6);
+}
+.briefing-body {
+  padding: 28px 28px 32px;
+}
+.briefing-section {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.briefing-section:last-of-type { margin-bottom: 0; }
+.briefing-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: #f0f6ff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+.briefing-section-text h4 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.briefing-section-text p {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+.briefing-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+.briefing-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.briefing-exit-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 100px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.briefing-exit-btn:hover { color: var(--text); background: var(--surface); }
+.briefing-continue-btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(35,108,255,0.32);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  display: flex; align-items: center; gap: 7px;
+}
+.briefing-continue-btn:hover {
+  background: #1a56d4;
+  box-shadow: 0 6px 18px rgba(35,108,255,0.42);
+  transform: translateY(-1px);
+}
+.briefing-continue-btn:active { transform: translateY(0); }
+.briefing-continue-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
 </style>
 </head>
 <body>
-<div id="root"></div>
+<header>
+  <div class="header-badge">EMEA</div>
+  <div class="logo">Role Play Simulation</div>
+</header>
+<div class="container">
+  <div id="briefing-screen">
+    <div class="briefing-hero" style="text-align:center;padding:36px 28px 32px;">
+      <div class="briefing-title">Outbound Call: Teresa Canopy</div>
+      <div class="briefing-sub" style="margin-top:6px;">Local Engravers Ltd. - Bristol</div>
+    </div>
+    <div class="briefing-body">
+      <div class="briefing-section">
+        <div class="briefing-icon">&#128100;</div>
+        <div class="briefing-section-text">
+          <h4>Your prospect</h4>
+          <p>Teresa is a sole trader who runs a stone engraving business across the South West. She manages her finances on Excel and has shown some interest online - but she is busy, a little guarded, and not yet convinced she needs anything new.</p>
+        </div>
+      </div>
+      <div class="briefing-section">
+        <div class="briefing-icon">&#127919;</div>
+        <div class="briefing-section-text">
+          <h4>Your goal</h4>
+          <p>Build rapport, uncover her real challenges, position the right solution, and agree a clear next step. Teresa responds to how well you listen and how relevant you make the conversation feel to her.</p>
+        </div>
+      </div>
+      <div class="briefing-section">
+        <div class="briefing-icon">&#128203;</div>
+        <div class="briefing-section-text">
+          <h4>How it works</h4>
+          <p>At each step you will choose from three responses. The conversation adapts to your choices. At the end you will receive a full scorecard with coaching feedback across 16 criteria.</p>
+        </div>
+      </div>
+      <hr class="briefing-divider">
+      <div class="briefing-actions">
+        <button class="briefing-continue-btn" onclick="showKeypad()">
+          Begin simulation
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="keypad-screen" style="display:none;">
+    <div class="contact-header">
+      <div class="contact-avatar">TC</div>
+      <div class="contact-info">
+        <div class="contact-name">Teresa Canopy</div>
+        <div class="contact-detail">Local Engravers Ltd. - Bristol</div>
+      </div>
+      <div class="contact-tag">Prospect</div>
+    </div>
+    <div class="keypad-body">
+      <div class="scene-desc">Enter your name below, then dial Teresa's number to begin.</div>
+      <div style="margin-bottom:20px;">
+        <label class="name-label" for="consultant-name">Your name</label>
+        <input id="consultant-name" class="name-input" type="text" placeholder="Enter your first name" oninput="checkCallReady()">
+        <div id="name-prompt" style="margin-top:8px;font-size:13px;color:#d97706;font-weight:600;opacity:0;max-height:0;overflow:hidden;transition:opacity 0.35s ease-out,max-height 0.35s ease-out;">Enter your name above to start the call.</div>
+      </div>
+      <div class="hint-number">Dial her number: <span>07700 900123</span></div>
+      <div class="dial-display" id="dial-display"><span id="dial-text"></span><span class="cursor"></span></div>
+      <div class="keypad-grid" id="keypad-grid"></div>
+      <div class="keypad-actions">
+        <button class="backspace-btn" onclick="dialBackspace()">Delete</button>
+        <button class="call-btn" id="call-btn" onclick="startRinging()"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:7px;"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>Call Teresa</button>
+      </div>
+    </div>
+  </div>
+  <div id="ringing-screen">
+    <div class="ring-container">
+      <div class="ring-circle"></div>
+      <div class="ring-circle"></div>
+      <div class="ring-circle"></div>
+      <div class="phone-icon-center">&#128222;</div>
+    </div>
+    <div class="ringing-label">Calling Teresa Canopy...</div>
+    <div class="ringing-number">07700 900123</div>
+  </div>
+  <div id="conversation-screen">
+    <div class="conv-topbar">
+      <div class="topbar-row">
+        <div class="topbar-title">
+          <div class="topbar-avatar">TC</div>
+          Teresa Canopy
+        </div>
+        <span class="topbar-step">Step <strong id="step-num">1</strong> / 12</span>
+      </div>
+      <div class="topbar-row">
+        <div class="progress-track" style="flex:1;margin-right:12px;"><div class="progress-fill" id="progress-fill" style="width:8.33%"></div></div>
+        <div class="track-pill" id="track-pill"><span class="track-dot"></span><span id="track-label">On track</span></div>
+      </div>
+    </div>
+    <div class="chat-zone" id="chat-zone"></div>
+    <div class="choices-tray" id="choices-tray">
+      <div class="step-prompt" id="step-prompt"></div>
+      <div class="choices-list" id="choices-list"></div>
+    </div>
+  </div>
+  <div id="results-screen"></div>
+</div>
 <script>
-const SYSTEM_PROMPT = `You are Teresa Canopy, owner of Local Engravers Ltd., a stone and custom engraving business in Bristol, UK. You are receiving an unexpected outbound call from a QuickBooks sales consultant.
+var phase='keypad',stepIndex=0,track='good',chatHistory=[],dialNumber='';
+var originalStepTexts=null;
+function saveOriginalTexts(){if(originalStepTexts)return;originalStepTexts=steps.map(function(s){return s.choices.map(function(c){return c.text;});});}
+function resetStepTexts(){if(!originalStepTexts)return;steps.forEach(function(s,si){s.choices.forEach(function(c,ci){c.text=originalStepTexts[si][ci];});});}
+var scores={build_rapport:0,set_agenda:0,role_clarification:0,upfront_contract:0,transition_insight:0,open_questions:0,probing_questions:0,confirming_questions:0,platform_positioning:0,active_listening:0,customer_story:0,objection_handling:0,recap_validate:0,revisit_upfront:0,next_steps:0,confirmed_commitment:0};
 
-YOUR PERSONA:
-- You answer the phone like a real busy small business owner would - a little caught off guard, mildly cautious.
-- Start with "Hello?" and be naturally sceptical at first. Warm up gradually if they explain who they are.
-- You answer what you're asked but don't elaborate unless prompted.
-- You are NOT technical. Excel works fine for you.
-- Short, natural answers. You don't monologue.
-- You previously filled out something online about accounting solutions, so if they reference that, you vaguely remember it.
+var steps=[
+{prompt:"Teresa has answered. How do you open the call?",
+choices:[
+{quality:'good',text:"Hi Teresa, my name is [your name] calling from [brand name]. You recently filled in a form about accounting solutions. I was hoping to learn a bit about your business and see if we might be able to help. Do you have a few minutes?",teresa_reaction:"Oh right, yes I did fill something in actually. Sure, I have a few minutes.",scores:{build_rapport:2,role_clarification:2,set_agenda:1}},
+{quality:'ok',text:"Hi Teresa, I'm calling from [brand name] about your enquiry.",teresa_reaction:"...[brand name]? Right. What is it you're after?",scores:{build_rapport:1,role_clarification:1}},
+{quality:'poor',text:"Hi Teresa, I want to tell you about [product name]. It's a great accounting solution for your business.",teresa_reaction:"Sorry, who are you? I didn't ask for a sales call.",scores:{}}
+],teresa_next:{good:"What is it you're offering exactly? Is this about the form I filled in?",ok:"I'm not really sure what this has to do with me, to be honest.",poor:"Look, I'm quite busy. What do you actually want?"}},
 
-YOUR BUSINESS (only share when asked):
-- Business: Local Engravers Ltd. - custom stone/commercial/residential engraving in Bristol, UK
-- Residential (house numbers, name stones) and commercial (logos on business card holders, boulders at office entrances)
-- 40+ services/locations across the South West and Wales. One brick-and-mortar shop.
-- 0 employees, sole trader, owner's draw only (no payroll needed)
-- Planning to open a second location soon and hire employees long-term
-- Use Excel to track everything - no bookkeeper
+{prompt:"Teresa wants to know what you're offering. How do you respond?",
+choices:[
+{quality:'good',text:"Great question. Before I tell you anything, I'd love to understand your business first. If by the end of our chat it feels like a good fit, I can walk you through what we offer. If not, no pressure at all. Does that work for you?",teresa_reaction:"Oh, that's... actually quite refreshing. Yes, fine, go ahead.",scores:{upfront_contract:3,active_listening:1}},
+{quality:'ok',text:"We help small businesses manage their accounts more easily. Before I go into that, can you tell me a bit about your business?",teresa_reaction:"I suppose that's fair enough. What do you want to know?",scores:{upfront_contract:1,open_questions:1}},
+{quality:'poor',text:"[Brand name] is a leading accounting solution. It does invoicing, expenses, tax returns and loads more. I think it would be perfect for you.",teresa_reaction:"Right. I've never heard of it. Why would I need it? I'm already managing fine.",scores:{}}
+],teresa_next:{good:"Go on then. What do you need to know?",ok:"What specifically do you need to know?",poor:"I really don't have time for a full pitch. Get to the point."}},
 
-CURRENT PAIN POINTS (only reveal when consultant digs deeper):
-- Surface level: "I'm decent at managing my books, but we've had some delays in payment lately."
-- Deeper (only if probed): Payment delays affect cash flow and plans for a second premises.
-- Sometimes forget to pay bills - has hurt vendor relationships
-- Don't track income by category
-- Print/email invoices from home. Accept cash, cheques, bank transfers.
-- Don't always have time to create estimates when out of the office
-- Don't send payment reminders - causes project delays
-- Want to accept credit/debit cards but worried about transaction fees
-- Tax time is stressful - receipts get misplaced
+{prompt:"She's open to talking. What do you ask first?",
+choices:[
+{quality:'good',text:"Brilliant. So tell me, what does Local Engravers do and how long have you been running it?",teresa_reaction:"Ha, well it's been going about seven years now. We do custom stone engraving. House numbers, memorial stones, commercial signage.",scores:{open_questions:2,build_rapport:1}},
+{quality:'ok',text:"How are you currently managing your accounts and finances?",teresa_reaction:"Excel, mostly. Why?",scores:{open_questions:1}},
+{quality:'poor',text:"Do you currently use any accounting software?",teresa_reaction:"No. Just a spreadsheet. Is that a problem?",scores:{}}
+],teresa_next:{good:"We're based in Bristol, cover the South West and Wales. It's just me running it. Sole trader.",ok:"It's just me. I do engraving. Stone work mostly.",poor:"I don't see why what I'm using now isn't good enough."}},
 
-CALL DRIVER: You filled something out online about getting an accounting solution. Not sure what you signed up for, but you're open to hearing about it.
+{prompt:"Teresa's given you something to work with. How do you probe deeper?",
+choices:[
+{quality:'good',text:"That's really interesting. Running all of that yourself - how do you keep on top of the financial side of things day to day?",teresa_reaction:"Ha, well that's just it isn't it. I try my best. It's a lot to keep track of.",scores:{transition_insight:2,probing_questions:2,active_listening:1}},
+{quality:'ok',text:"Are you looking to grow the business at all?",teresa_reaction:"Maybe. I'd like to eventually. Why do you ask?",scores:{probing_questions:1}},
+{quality:'poor',text:"I think you'd really benefit from proper accounting software. Spreadsheets cause a lot of problems.",teresa_reaction:"You don't actually know anything about how I run my business.",scores:{}}
+],teresa_next:{good:"I do it myself in Excel. It works mostly. I know where everything is. Most of the time.",ok:"I manage it all myself. It's fine mostly. A few things slip through.",poor:"I'm perfectly fine with how I manage things, thank you."}},
 
-EXPECTED RECOMMENDATION (do not reveal): QuickBooks Online Advanced - Class Tracking, Spreadsheet Sync, Workflows, Priority Circle, custom reports, forecasting.
+{prompt:"She's hinting at problems. How do you follow up?",
+choices:[
+{quality:'good',text:"You said it works 'most of the time' - I caught that. What happens when it doesn't? Where does it get tricky?",teresa_reaction:"Ha, you caught that. Well... sometimes invoices go out late. Or I forget to chase them. And I've definitely missed a couple of bills myself.",scores:{probing_questions:3,active_listening:2}},
+{quality:'ok',text:"What are the biggest challenges you face managing your books?",teresa_reaction:"I suppose chasing payments is a bit of a pain. And tax time is never fun.",scores:{probing_questions:1,open_questions:1}},
+{quality:'poor',text:"Right, well [brand name] would sort all of that out. It's much better than spreadsheets.",teresa_reaction:"I haven't said anything is wrong. You're not really listening, are you.",scores:{}}
+],teresa_next:{good:"It's not ideal. Supplier relationships take a hit when you forget things. And I've got plans I can't really action yet.",ok:"It's manageable mostly. Just a bit stressful at times.",poor:"EARLY_EXIT"},earlyExitCondition:true},
 
-OBJECTIONS (pick 1-2 naturally):
-- "Why would Simple Start not work for this business? I have a simple business."
-- "Why can't I just buy something one time and keep it forever?"
-- "It seems expensive for what I'm trying to accomplish."
+{prompt:"Teresa's shared some frustrations. How do you respond?",
+choices:[
+{quality:'good',text:"It sounds like things slip through more than you'd like. When that happens - payments going out late, things being forgotten - what impact does that have on your ability to plan ahead?",teresa_reaction:"It's significant actually. I've got plans for a second location but I can't commit without knowing what's coming in.",scores:{active_listening:2,probing_questions:2,confirming_questions:1}},
+{quality:'ok',text:"I see, so cash flow is an issue. What else causes you problems?",teresa_reaction:"Cash flow, yes. And admin around tax time. Receipts everywhere.",scores:{active_listening:1,open_questions:1}},
+{quality:'poor',text:"[Brand name] has automatic payment reminders that would solve that completely.",teresa_reaction:"You haven't really asked much about what I actually need.",scores:{platform_positioning:1}}
+],teresa_next:{good:"Tax time is a nightmare too. Receipts everywhere. I just muddle through.",ok:"It's just a lot to manage on your own really.",poor:"I'm not convinced you understand my situation at all."}},
 
-ADDITIONAL QUESTIONS (ask if natural):
-- Can my accountant get access to my books?
-- Will I get help setting up my Chart of Accounts?
+{prompt:"You've heard some of her challenges. What do you do now?",
+choices:[
+{quality:'good',text:"So let me make sure I've understood this correctly. The main things are keeping on top of payments and staying organised for tax time - and those are getting in the way of where you want to take the business. Have I got that right?",teresa_reaction:"Yes, that's exactly it actually. You've summarised it quite well.",scores:{confirming_questions:2,active_listening:2,recap_validate:2}},
+{quality:'ok',text:"So cash flow and admin are the main pain points. Got it.",teresa_reaction:"Pretty much, yes.",scores:{active_listening:1}},
+{quality:'poor',text:"Perfect, let me tell you about everything [brand name] can do for you...",teresa_reaction:"Hang on, are you not going to ask me anything else? You don't know the half of it.",scores:{}}
+],teresa_next:{good:"The payment side is really the biggest thing. If I knew money was coming in reliably, I could actually plan.",ok:"I suppose so. What does [brand name] actually do then?",poor:"I think I've heard enough to be honest. I'm not really looking for software right now."}},
 
-RULES:
-- Do NOT volunteer information. Wait to be asked.
-- Keep responses conversational and short - like a real phone call.
-- Do NOT break character. Respond only as Teresa.
-- Your very first response must be just "Hello?" as if answering the phone cold.`;
+{prompt:"Time to position the solution. How do you bridge from pain to product?",
+choices:[
+{quality:'good',text:"I work with a lot of sole traders in similar positions. One of my clients, a small events company in Cardiff, was losing about two weeks of cash flow every month just from late invoices. Once they switched to [brand name] and set up automated reminders, that basically disappeared. Would it be useful to show you how that works for a business like yours?",teresa_reaction:"Automated reminders... so it would just send them for me? I wouldn't have to remember?",scores:{transition_insight:2,customer_story:3,platform_positioning:1}},
+{quality:'ok',text:"[Brand name] has a workflow automation feature that sends payment reminders automatically, so you'd never have to remember to chase anyone.",teresa_reaction:"Oh, that does sound useful. Is it complicated to set up?",scores:{platform_positioning:2}},
+{quality:'poor',text:"[Brand name] does invoicing, expenses, bank reconciliation, payroll, tax returns, forecasting, class tracking, spreadsheet sync and loads more.",teresa_reaction:"That's... a lot. I don't think I need most of that.",scores:{platform_positioning:1}}
+],teresa_next:{good:"That would actually be really useful. But why would I need the more advanced version? Surely something simpler would do. I'm just one person.",ok:"I'd like to understand more. But I'm worried it might be overkill for me.",poor:"It sounds very complicated. I really don't need all that."}},
 
-const SCORE_PROMPT = `You are a warm, encouraging sales coach evaluating a brand new hire on their very first sales role play.
+{prompt:"She's questioning whether she needs the advanced tier. How do you handle it?",
+choices:[
+{quality:'good',text:"That's a completely fair question and I'd ask the same thing. The reason I'd suggest the advanced tier is the visibility it gives you - you can see which jobs are most profitable, track different types of work separately, and get proper forecasting. The entry level doesn't give you any of that. For a business with ambitions to grow, that data is really valuable.",teresa_reaction:"I suppose that makes sense. The different job types are quite varied in how profitable they are.",scores:{objection_handling:3,platform_positioning:2}},
+{quality:'ok',text:"The entry-level plan works for very simple needs, but the advanced tier gives you better forecasting and reporting - useful if you ever want to grow or just get a clearer picture of the business.",teresa_reaction:"I hadn't thought about the reporting side. That's a fair point.",scores:{objection_handling:2,platform_positioning:1}},
+{quality:'poor',text:"You're right, maybe the basic plan would be enough for now.",teresa_reaction:"So why were you recommending the advanced version a moment ago?",scores:{}}
+],teresa_next:{good:"It does seem expensive though for what I'm trying to do.",ok:"What does it cost? I'm not sure I can justify it.",poor:"I'm not sure you actually know what you're recommending."}},
 
-Scoring philosophy: Default generously. Award 1 (Developing) for any recognisable attempt. Award 2 (Proficient) when the skill moved the conversation forward. Reserve 0 (Not Observed) only for no evidence at all.
+{prompt:"She's raised a price concern. What's your approach?",
+choices:[
+{quality:'good',text:"I hear you, and it's a fair concern. Think about what even one recovered late payment per month would mean for you. If a single client pays two weeks earlier because of an automated reminder, that's probably already covering the monthly cost. It's less an expense and more an investment in getting the business running the way you want it to.",teresa_reaction:"Hmm. I suppose I hadn't thought of it that way. That's quite a good point actually.",scores:{objection_handling:3,active_listening:1}},
+{quality:'ok',text:"There's a free trial so you can see the value before committing to anything.",teresa_reaction:"A free trial? That might be worth doing I suppose.",scores:{objection_handling:1}},
+{quality:'poor',text:"I might be able to get you a deal if you sign up today.",teresa_reaction:"I'm not going to be pressured into signing up today, thank you.",scores:{}}
+],teresa_next:{good:"Can my accountant get access to my books through it?",ok:"Can I share access with my accountant somehow?",poor:"I need to think about this. It feels like a lot."}},
 
-RUBRIC (score each 0-3):
-Introduction: build_rapport, set_agenda, role_clarification, upfront_contract
-Discovery: transition_insight, open_questions, probing_questions, confirming_questions, platform_positioning, active_listening
-Proof of Concept: customer_story
-Progress the Deal: objection_handling, recap_validate, revisit_upfront, next_steps, confirmed_commitment
+{prompt:"She's asking a practical question. How do you close?",
+choices:[
+{quality:'good',text:"Absolutely. Your accountant gets their own login with the right level of access, so no more emailing spreadsheets at year end. Now, we said at the start that if it felt like a fit we'd talk next steps. It sounds like it does. What I'd suggest is a 30-minute demo so you can see it working with a real engraving business. I can send a calendar link today. Does that work?",teresa_reaction:"Yes, I'd be open to seeing how it works. Not committing to anything yet, but I'd like to understand it better.",scores:{platform_positioning:1,revisit_upfront:3,next_steps:3,confirmed_commitment:2}},
+{quality:'ok',text:"Yes, accountant access is included. It might be worth booking a demo so you can see everything properly.",teresa_reaction:"A demo might be useful yes. How would that work?",scores:{next_steps:2,confirmed_commitment:1}},
+{quality:'poor',text:"Yes, you can give your accountant access. It's a really useful feature.",teresa_reaction:"Right... so what happens now then?",scores:{}}
+],teresa_next:{good:"Yes I'd be open to that. What would the next step be exactly?",ok:"Sure, that could work. I'll need to check my diary.",poor:"I'll have a think. I'm not sure it's right for me."}},
 
-The correct recommendation is QuickBooks Online Advanced.
-
-Return ONLY valid JSON (no markdown, no backticks):
-{"scores":{"build_rapport":0,"set_agenda":0,"role_clarification":0,"upfront_contract":0,"transition_insight":0,"open_questions":0,"probing_questions":0,"confirming_questions":0,"platform_positioning":0,"active_listening":0,"customer_story":0,"objection_handling":0,"recap_validate":0,"revisit_upfront":0,"next_steps":0,"confirmed_commitment":0},"strengths":["s1","s2","s3"],"opportunities":["o1","o2","o3"],"coaching_summary":"2-3 sentence note"}
-
-TRANSCRIPT:
-`;
-
-const CRITERIA=[
-  {key:"build_rapport",label:"Build rapport",seg:"Introduction"},
-  {key:"set_agenda",label:"Set and confirm agenda",seg:"Introduction"},
-  {key:"role_clarification",label:"Role clarification",seg:"Introduction"},
-  {key:"upfront_contract",label:"Provide upfront contract",seg:"Introduction"},
-  {key:"transition_insight",label:"Transition with insight",seg:"Discovery"},
-  {key:"open_questions",label:"Open-ended questions",seg:"Discovery"},
-  {key:"probing_questions",label:"Probing questions",seg:"Discovery"},
-  {key:"confirming_questions",label:"Confirming questions",seg:"Discovery"},
-  {key:"platform_positioning",label:"Platform value positioning",seg:"Discovery"},
-  {key:"active_listening",label:"Active listening, mirroring, empathy",seg:"Discovery"},
-  {key:"customer_story",label:"Customer story (PRO Value)",seg:"Proof of Concept"},
-  {key:"objection_handling",label:"Handled objections",seg:"Progress the Deal"},
-  {key:"recap_validate",label:"Recapped and validated",seg:"Progress the Deal"},
-  {key:"revisit_upfront",label:"Revisit upfront contract",seg:"Progress the Deal"},
-  {key:"next_steps",label:"Proposed clear next steps",seg:"Progress the Deal"},
-  {key:"confirmed_commitment",label:"Confirmed commitment",seg:"Progress the Deal"},
+{prompt:"She's agreed to a next step. How do you close out the call?",
+choices:[
+{quality:'good',text:"Brilliant. I'll send a calendar invite to teresacanopy@localengravers.co.uk. Just pick a slot that suits you. And Teresa, thank you so much for your time today. You've given me a really clear picture of the business and I think there's a great fit here.",teresa_reaction:"Thanks. I'll keep an eye out for that. Speak soon.",scores:{confirmed_commitment:2,build_rapport:1,recap_validate:1}},
+{quality:'ok',text:"Great, I'll send over a link to book a time. Speak soon!",teresa_reaction:"Okay. Bye then.",scores:{confirmed_commitment:1}},
+{quality:'poor',text:"Okay great. Bye.",teresa_reaction:"...Right. Bye.",scores:{}}
+],teresa_next:{good:null,ok:null,poor:null},isLast:true}
 ];
-const SL={0:"Not Observed",1:"Developing",2:"Proficient",3:"Advanced"};
-const SEGS=[
-  {name:"Introduction",keys:["build_rapport","set_agenda","role_clarification","upfront_contract"],max:12},
-  {name:"Discovery",keys:["transition_insight","open_questions","probing_questions","confirming_questions","platform_positioning","active_listening"],max:18},
-  {name:"Proof of Concept",keys:["customer_story"],max:3},
-  {name:"Progress the Deal",keys:["objection_handling","recap_validate","revisit_upfront","next_steps","confirmed_commitment"],max:15},
-];
-const ZOOM_STEPS=[
-  "Create a new lead for Teresa Canopy / Local Engravers Ltd. in Salesforce",
-  "Convert the lead into an opportunity",
-  "Place the correct QBO order for the recommended solution",
-  "Verbalise compliance steps: T&C scripting, secure pause for PII, and next steps email",
-];
-const PHONE="07700 900123",PHONE_CLEAN="07700900123";
 
-let apiKey=localStorage.getItem("qb_rp_apikey")||"";
-let phase=apiKey?"intro":"apikey",messages=[],inputVal="",loading=false,scoreData=null;
-let showTranscript=false,confirmEnd=false,showResultsText=false,confirmRestart=false;
-let pastedTranscript="",keyDigits="",keyWrong=false;
+var criteria=[
+{key:'build_rapport',label:'Build rapport',segment:'Introduction'},
+{key:'set_agenda',label:'Set and confirm agenda',segment:'Introduction'},
+{key:'role_clarification',label:'Role clarification',segment:'Introduction'},
+{key:'upfront_contract',label:'Provide upfront contract',segment:'Introduction'},
+{key:'transition_insight',label:'Transition with insight',segment:'Discovery'},
+{key:'open_questions',label:'Open-ended questions',segment:'Discovery'},
+{key:'probing_questions',label:'Probing questions',segment:'Discovery'},
+{key:'confirming_questions',label:'Confirming questions',segment:'Discovery'},
+{key:'platform_positioning',label:'Platform value positioning',segment:'Discovery'},
+{key:'active_listening',label:'Active listening, mirroring, empathy',segment:'Discovery'},
+{key:'customer_story',label:'Customer story (PRO Value)',segment:'Proof of Concept'},
+{key:'objection_handling',label:'Handled objections',segment:'Progress the Deal'},
+{key:'recap_validate',label:'Recapped and validated',segment:'Progress the Deal'},
+{key:'revisit_upfront',label:'Revisit upfront contract',segment:'Progress the Deal'},
+{key:'next_steps',label:'Proposed clear next steps',segment:'Progress the Deal'},
+{key:'confirmed_commitment',label:'Confirmed commitment',segment:'Progress the Deal'}
+];
 
-function h(tag,attrs,...children){
-  const el=document.createElement(tag);
-  if(attrs)Object.entries(attrs).forEach(([k,v])=>{
-    if(k==="class")el.className=v;
-    else if(k==="style")el.style.cssText=v;
-    else if(k.startsWith("on"))el.addEventListener(k.slice(2).toLowerCase(),v);
-    else if(k==="disabled"&&v)el.disabled=true;
-    else el.setAttribute(k,v);
+var segments=[{name:'Introduction',max:12},{name:'Discovery',max:18},{name:'Proof of Concept',max:3},{name:'Progress the Deal',max:15}];
+
+var coaching={
+build_rapport:["No rapport or trust was established. The conversation began abruptly or transactionally.","Some attempt at rapport, but limited impact. Felt scripted or rushed.","Adequate rapport was built. Tone was friendly and conversational.","Strong rapport and trust clearly established from the start."],
+set_agenda:["No agenda was set. Teresa had no clarity on the purpose of the call.","A partial agenda was attempted but not confirmed with Teresa.","An agenda was set and broadly confirmed.","A clear, confirmed agenda created structure and mutual expectations."],
+role_clarification:["Your role and reason for calling were not made clear.","Role was mentioned but felt unclear or rushed.","Role was explained adequately.","Role and purpose were clearly and confidently communicated from the outset."],
+upfront_contract:["No upfront contract was offered. Teresa didn't know what to expect.","A partial upfront contract was attempted.","An upfront contract was offered and accepted.","A strong upfront contract created a collaborative tone and clear mutual expectations."],
+transition_insight:["No insight-led transition was made. The move to discovery felt abrupt.","Some transition was attempted but lacked insight or depth.","A reasonable transition with some relevant insight.","Seamless transition using relevant insight that built credibility and opened discovery."],
+open_questions:["No open-ended questions were asked. Discovery was closed or directive.","Limited open questions. Some leading or closed questions were used.","Open questions were used effectively to explore Teresa's situation.","Consistent, well-crafted open questions drove rich discovery throughout."],
+probing_questions:["No probing. Surface-level conversation only.","Some probing but missed key opportunities to go deeper.","Probed effectively into key pain areas.","Excellent probing that uncovered root causes and business impact."],
+confirming_questions:["No confirmation of understanding. Teresa's situation was not validated.","Some attempt to confirm but incomplete or inaccurate.","Understanding was confirmed with Teresa's agreement.","Precise confirmation that demonstrated deep listening and built trust."],
+platform_positioning:["No product value was articulated in context.","Some product mentions but not linked to Teresa's specific needs.","Product was positioned against Teresa's stated pain points.","Compelling, tailored value proposition directly linked to Teresa's priorities."],
+active_listening:["No evidence of active listening. Responses ignored or talked over Teresa.","Some listening but missed cues or failed to mirror effectively.","Good listening with appropriate empathy and mirroring.","Excellent active listening - caught nuances, mirrored language, built genuine connection."],
+customer_story:["No customer story or proof point was used.","A story was referenced but lacked relevance or detail.","A relevant customer story was shared effectively.","A powerful, specific customer story that directly addressed Teresa's situation."],
+objection_handling:["Objections were not handled. Teresa's concerns were dismissed or ignored.","Objections were acknowledged but not effectively resolved.","Objections were handled with reasonable responses.","Objections were turned into opportunities with confident, empathetic responses."],
+recap_validate:["No recap or validation was offered.","A partial recap was given but not validated with Teresa.","A clear recap was given and confirmed.","A precise, compelling recap that Teresa confirmed and that accelerated the close."],
+revisit_upfront:["The upfront contract was never revisited.","Some reference to next steps but the upfront contract was not explicitly revisited.","The upfront contract was revisited and used to move forward.","The upfront contract was revisited confidently and used as a close anchor."],
+next_steps:["No next steps were proposed.","Vague next steps were mentioned.","Clear next steps were proposed and agreed.","Specific, concrete next steps were proposed and enthusiastically confirmed."],
+confirmed_commitment:["No commitment was secured.","A weak or vague commitment was obtained.","A clear commitment was confirmed.","A strong, specific commitment was confirmed with energy and professionalism."]
+};
+
+var keyLetters={'2':'ABC','3':'DEF','4':'GHI','5':'JKL','6':'MNO','7':'PQRS','8':'TUV','9':'WXYZ'};
+
+function buildKeypad(){
+var keys=['1','2','3','4','5','6','7','8','9','*','0','#'];
+var grid=document.getElementById('keypad-grid');
+keys.forEach(function(k){
+var btn=document.createElement('button');
+btn.className='key-btn';
+btn.innerHTML=k+(keyLetters[k]?'<span class="key-letters">'+keyLetters[k]+'</span>':'');
+btn.onclick=function(){dialDigit(k);};
+grid.appendChild(btn);
+});
+}
+
+function dialDigit(d){if(dialNumber.length>=11)return;dialNumber+=d;updateDialDisplay();checkCallReady();}
+function dialBackspace(){dialNumber=dialNumber.slice(0,-1);updateDialDisplay();checkCallReady();}
+function updateDialDisplay(){
+var el=document.getElementById('dial-text');
+var dd=document.getElementById('dial-display');
+var f='';for(var i=0;i<dialNumber.length;i++){if(i===5)f+=' ';f+=dialNumber[i];}
+el.textContent=f;
+if(dialNumber.length>0){dd.classList.add('has-digits');}else{dd.classList.remove('has-digits');}
+}
+function checkCallReady(){
+var btn=document.getElementById('call-btn');
+var prompt=document.getElementById('name-prompt');
+var name=(document.getElementById('consultant-name').value||'').trim();
+var numberComplete=dialNumber==='07700900123';
+if(numberComplete&&name.length>0){
+  btn.classList.add('visible');
+  prompt.style.opacity='0';prompt.style.maxHeight='0';
+}else{
+  btn.classList.remove('visible');
+  if(numberComplete&&name.length===0){prompt.style.opacity='1';prompt.style.maxHeight='40px';}
+  else{prompt.style.opacity='0';prompt.style.maxHeight='0';}
+}
+}
+
+function fadeOut(el,cb){
+  el.style.transition='opacity 0.35s ease';
+  el.style.opacity='0';
+  setTimeout(function(){el.style.display='none';el.style.opacity='';el.style.transition='';if(cb)cb();},360);
+}
+function fadeIn(el,displayVal,cb){
+  el.style.opacity='0';
+  el.style.display=displayVal||'block';
+  el.style.transition='opacity 0.4s ease';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      el.style.opacity='1';
+      setTimeout(function(){el.style.transition='';if(cb)cb();},420);
+    });
   });
-  children.flat().forEach(c=>{if(c!=null)el.appendChild(typeof c==="string"?document.createTextNode(c):c);});
-  return el;
 }
 
-function fmtPhone(d){
-  if(!d)return"";
-  if(d.length<=5)return d;
-  if(d.length<=8)return d.slice(0,5)+" "+d.slice(5);
-  return d.slice(0,5)+" "+d.slice(5,8)+" "+d.slice(8);
-}
-
-function render(){document.getElementById("root").replaceChildren(buildPhase());}
-
-function infoCard(){
-  return h("div",{class:"card"},
-    h("div",{class:"info-header"},
-      h("div",{class:"badge"},"Customer Record"),
-      h("div",{class:"name"},"Teresa Canopy"),
-      h("div",{class:"biz"},"Local Engravers Ltd.")
-    ),
-    h("div",{class:"info-grid"},
-      ...["Role:Business Owner","Reason for call:Accounting Solution","Current solution:Excel","Phone:"+PHONE].map(f=>{
-        const[l,v]=f.split(":");
-        return h("div",{class:"info-field"},h("label",null,l),h("span",null,v));
-      }),
-      h("div",{class:"info-field full"},h("label",null,"Email"),h("span",null,"teresacanopy@localengravers.co.uk"))
-    )
-  );
-}
-
-function keypad(){
-  const isOk=keyDigits===PHONE_CLEAN;
-  const wrap=h("div",null);
-  const disp=h("div",{class:"keypad-display"+(isOk?" correct":"")+(keyWrong?" wrong":"")});
-  if(keyDigits){disp.textContent=fmtPhone(keyDigits);}
-  else{disp.style.color="#94a3b8";disp.style.fontSize="13px";disp.style.letterSpacing="0";disp.textContent="Enter number...";}
-  wrap.appendChild(disp);
-  const grid=h("div",{class:"key-grid"});
-  ["1","2","3","4","5","6","7","8","9","*","0","#"].forEach(k=>{
-    grid.appendChild(h("button",{class:"key-btn",onclick:()=>{if(keyDigits.length<11){keyDigits+=k;keyWrong=false;render();}}},k));
+function showKeypad(){
+  fadeOut(document.getElementById('briefing-screen'),function(){
+    fadeIn(document.getElementById('keypad-screen'),'block');
   });
-  wrap.appendChild(grid);
-  wrap.appendChild(h("div",{class:"dial-row"},
-    h("button",{class:"del-btn",onclick:()=>{keyDigits=keyDigits.slice(0,-1);render();}},"⌫ Delete"),
-    h("button",{class:"dial-btn "+(isOk?"ready":"not-ready"),onclick:()=>{
-      if(!isOk){if(keyDigits.length===11){keyWrong=true;render();setTimeout(()=>{keyWrong=false;render();},500);}return;}
-      phase="ringing";render();
-      setTimeout(()=>{messages=[{role:"assistant",content:"Hello?"}];phase="chat";render();},3000);
-    }},"📞 Dial")
-  ));
-  if(keyWrong)wrap.appendChild(h("p",{style:"font-size:12px;color:#991b1b;text-align:center;margin-top:6px"},"That number doesn't match the customer record. Check the info card and try again."));
-  return wrap;
 }
 
-function buildPhase(){
-  if(phase==="apikey"){
-    let keyInput="";
-    const inp=h("input",{type:"password",placeholder:"sk-ant-...",style:"width:100%;padding:11px 13px;font-size:13px;border-radius:10px;border:1.5px solid #e2e8f0;outline:none;font-family:inherit;margin-bottom:8px;display:block"});
-    inp.addEventListener("input",e=>{keyInput=e.target.value;});
-    inp.addEventListener("keydown",e=>{if(e.key==="Enter")save();});
-    const err=h("div",{style:"display:none;font-size:12px;color:#991b1b;margin-bottom:8px"});
-    function save(){
-      const k=keyInput.trim();
-      if(!k.startsWith("sk-ant-")){err.style.display="block";err.textContent="That doesn't look right - Anthropic keys start with sk-ant-";return;}
-      apiKey=k;localStorage.setItem("qb_rp_apikey",k);phase="intro";render();
+function startRinging(){
+  fadeOut(document.getElementById('keypad-screen'),function(){
+    fadeIn(document.getElementById('ringing-screen'),'flex',function(){
+      setTimeout(function(){
+        fadeOut(document.getElementById('ringing-screen'),function(){
+          document.getElementById('chat-zone').innerHTML='';
+          startConversation();
+        });
+      },3000);
+    });
+  });
+}
+
+function startConversation(){
+  var cs=document.getElementById('conversation-screen');
+  cs.style.display='flex';
+  cs.style.opacity='0';
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      cs.style.transition='opacity 0.4s ease';
+      cs.style.opacity='1';
+      setTimeout(function(){cs.style.transition='';},420);
+    });
+  });
+  var name=(document.getElementById('consultant-name').value||'').trim();
+  saveOriginalTexts();
+  if(name){
+    steps.forEach(function(step){
+      step.choices.forEach(function(c){
+        c.text=c.text.replace(/\[your name\]/gi,name);
+      });
+    });
+  }
+  renderStep();
+}
+
+function updateTrack(quality){
+  if(quality==='poor'){if(track==='good')track='ok';else if(track==='ok')track='poor';}
+  else if(quality==='ok'){if(track==='good')track='ok';}
+}
+
+function addScores(s){Object.keys(s).forEach(function(k){scores[k]=Math.min(3,scores[k]+s[k]);});}
+
+function scrollChat(){
+  var z=document.getElementById('chat-zone');
+  if(z)z.scrollTop=z.scrollHeight;
+}
+
+function addBubble(type,text){
+  var z=document.getElementById('chat-zone');
+  var b=document.createElement('div');
+  b.className='chat-bubble '+type;
+  var lbl=type==='user'?'You':'Teresa';
+  b.innerHTML='<div class="bubble-label">'+lbl+'</div>'+esc(text);
+  z.appendChild(b);
+  scrollChat();
+  return b;
+}
+
+function showTyping(){
+  var z=document.getElementById('chat-zone');
+  var t=document.createElement('div');
+  t.className='typing-bubble';
+  t.id='typing-indicator';
+  t.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  z.appendChild(t);
+  scrollChat();
+}
+
+function hideTyping(){
+  var t=document.getElementById('typing-indicator');
+  if(t)t.parentNode.removeChild(t);
+}
+
+function updateTrackPill(){
+  var pill=document.getElementById('track-pill');
+  var lbl=document.getElementById('track-label');
+  pill.className='track-pill'+(track!=='good'?' '+track:'');
+  lbl.textContent=track==='good'?'On track':track==='ok'?'Needs work':'At risk';
+}
+
+function renderStepSmooth(){
+  var tray=document.getElementById('choices-tray');
+  tray.style.transition='opacity 0.3s ease';
+  tray.style.opacity='0';
+  setTimeout(function(){
+    renderStep();
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        tray.style.opacity='1';
+        setTimeout(function(){tray.style.transition='';},320);
+      });
+    });
+  },300);
+}
+
+function renderStep(){
+  var step=steps[stepIndex];
+  document.getElementById('step-num').textContent=stepIndex+1;
+  document.getElementById('progress-fill').style.width=(((stepIndex+1)/12)*100)+'%';
+  updateTrackPill();
+
+  /* re-render chat history into zone */
+  var z=document.getElementById('chat-zone');
+  z.innerHTML='';
+  chatHistory.forEach(function(msg){
+    var b=document.createElement('div');
+    b.className='chat-bubble '+msg.type;
+    b.style.animation='none';
+    var lbl=msg.type==='user'?'You':'Teresa';
+    b.innerHTML='<div class="bubble-label">'+lbl+'</div>'+esc(msg.text);
+    z.appendChild(b);
+  });
+  scrollChat();
+
+  /* populate choices tray */
+  var tray=document.getElementById('choices-tray');
+  tray.classList.remove('fading');
+  tray.style.opacity='';
+  document.getElementById('step-prompt').textContent=step.prompt;
+  var cl=document.getElementById('choices-list');
+  cl.innerHTML='';
+  var shuffled=step.choices.map(function(c,i){return{choice:c,idx:i};});
+  for(var i=shuffled.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=shuffled[i];shuffled[i]=shuffled[j];shuffled[j]=tmp;}
+  var group=document.createElement('div');
+  group.setAttribute('role','group');
+  group.setAttribute('aria-labelledby','step-prompt');
+  shuffled.forEach(function(item){
+    var btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.textContent=item.choice.text;
+    btn.onclick=(function(i){return function(){handleChoice(i);};})(item.idx);
+    group.appendChild(btn);
+  });
+  cl.appendChild(group);
+}
+
+function handleChoice(idx){
+  var step=steps[stepIndex];
+  var choice=step.choices[idx];
+
+  /* disable all buttons immediately */
+  document.getElementById('choices-list').querySelectorAll('.choice-btn').forEach(function(b){b.disabled=true;});
+
+  /* fade out the tray */
+  var tray=document.getElementById('choices-tray');
+  tray.classList.add('fading');
+
+  /* push user bubble into chat */
+  chatHistory.push({type:'user',text:choice.text});
+  addBubble('user',choice.text);
+
+  addScores(choice.scores);
+  updateTrack(choice.quality);
+
+  updateTrackPill();
+
+  /* early exit check */
+  if(step.earlyExitCondition&&track==='poor'){
+    var exitMsg="I don't think this is for me. Thanks for calling.";
+    showTyping();
+    setTimeout(function(){
+      hideTyping();
+      chatHistory.push({type:'teresa-reaction',text:choice.teresa_reaction});
+      addBubble('teresa-reaction',choice.teresa_reaction);
+      showTyping();
+      setTimeout(function(){
+        hideTyping();
+        chatHistory.push({type:'teresa-next',text:exitMsg});
+        addBubble('teresa-next',exitMsg);
+        setTimeout(function(){showResults();},1500);
+      },1200);
+    },800);
+    return;
+  }
+
+  /* show Teresa's reaction */
+  showTyping();
+  setTimeout(function(){
+    hideTyping();
+    chatHistory.push({type:'teresa-reaction',text:choice.teresa_reaction});
+    addBubble('teresa-reaction',choice.teresa_reaction);
+
+    if(step.isLast){setTimeout(function(){showResults();},1800);return;}
+
+    var nextLine=step.teresa_next[choice.quality];
+    if(nextLine){
+      showTyping();
+      setTimeout(function(){
+        hideTyping();
+        chatHistory.push({type:'teresa-next',text:nextLine});
+        addBubble('teresa-next',nextLine);
+        /* advance to next step — fade tray out, rebuild, fade back in */
+        setTimeout(function(){stepIndex++;renderStepSmooth();},900);
+      },1100);
+    } else {
+      setTimeout(function(){stepIndex++;renderStepSmooth();},900);
     }
-    return h("div",{class:"page",style:"padding-top:3.5rem"},
-      h("div",{style:"max-width:380px;margin:0 auto"},
-        h("div",{style:"font-size:2rem;margin-bottom:1rem;text-align:center"},"🔑"),
-        h("h1",{style:"text-align:center;margin-bottom:.5rem"},"API key needed"),
-        h("p",{style:"text-align:center;margin-bottom:1.75rem"},"This simulation calls the Anthropic API directly. Paste your key below - it stays in your browser only and is never sent anywhere else."),
-        inp,
-        err,
-        h("button",{class:"btn btn-primary btn-full",onclick:save},"Continue →"),
-        h("p",{style:"font-size:12px;color:#94a3b8;text-align:center;margin-top:12px"},"Your key is saved in localStorage so you won't need to re-enter it. Clear browser data to remove it.")
-      )
-    );
-  }
-  if(phase==="intro"){
-    const ta=h("textarea",{placeholder:"Paste your transcript here...",rows:"7",style:"margin-bottom:8px"});
-    ta.value=pastedTranscript;ta.addEventListener("input",e=>{pastedTranscript=e.target.value;});
-    return h("div",{class:"page"},
-      h("div",{class:"overline",style:"margin-bottom:6px"},"Performance Skill Check 1B"),
-      h("h1",null,"Outbound role play simulation"),
-      h("p",{style:"margin-bottom:1.25rem"},"You'll play the role of a QuickBooks sales consultant. The AI plays Teresa Canopy, owner of Local Engravers Ltd., who recently enquired about accounting solutions."),
-      infoCard(),
-      h("div",{class:"card"},h("div",{class:"card-body"},
-        h("div",{style:"font-size:13px;font-weight:600;margin-bottom:8px;color:#1e293b"},"You will be scored on"),
-        h("div",{class:"badge-row"},
-          ...["Introduction","Discovery","Proof of Concept","Progress the Deal"].map(s=>h("span",{class:"dot-badge"},h("span",{class:"dot"}),s))
-        ),
-        h("div",{style:"font-size:12px;color:#94a3b8;margin-top:8px"},"16 criteria · 48 points maximum")
-      )),
-      h("div",{class:"alert alert-info",style:"margin-bottom:1.25rem"},
-        h("strong",{style:"font-weight:600"},"Prefer to speak?")," Use Windows + H on PC or F5 on Mac to dictate into the chat."
-      ),
-      h("div",{class:"card"},h("div",{class:"card-body"},
-        h("div",{style:"font-size:14px;font-weight:600;margin-bottom:4px;color:#1e293b"},"Dial to begin"),
-        h("p",{style:"margin-bottom:1rem"},"Enter Teresa's phone number from the customer record above, then press Dial."),
-        keypad()
-      )),
-      h("div",{class:"divider"}),
-      h("div",{style:"font-size:14px;font-weight:600;margin-bottom:4px;color:#1e293b"},"Already have a transcript?"),
-      h("p",{style:"margin-bottom:.75rem"},"Paste a call transcript below to score it using the same rubric."),
-      h("div",{class:"alert alert-warn",style:"margin-bottom:.75rem;font-size:12px"},"Only use this if scoring failed after completing the simulation above."),
-      ta,
-      h("button",{class:"btn btn-primary btn-full",onclick:()=>{if(!pastedTranscript.trim())return;runScoring(pastedTranscript.trim());}},"Score this transcript →")
-    );
-  }
-
-  if(phase==="ringing"){
-    return h("div",{class:"page"},
-      h("div",{class:"ring-wrap"},
-        h("div",{class:"ring-avatar"},
-          h("div",{class:"ring-pulse"}),h("div",{class:"ring-pulse"}),h("div",{class:"ring-pulse"}),"📞"
-        ),
-        h("div",{style:"font-size:17px;font-weight:600;margin-bottom:6px;color:#0f172a"},"Calling Teresa Canopy..."),
-        h("div",{style:"font-size:14px;color:#64748b;margin-bottom:4px"},PHONE),
-        h("div",{style:"font-size:13px;color:#94a3b8"},"Ringing...")
-      )
-    );
-  }
-
-  if(phase==="chat"){
-    const msgList=h("div",{class:"msgs",id:"msglist"});
-    messages.forEach(m=>{
-      msgList.appendChild(h("div",{class:"msg-row fadein "+(m.role==="user"?"user":"")},
-        h("div",{class:"bubble "+(m.role==="user"?"user":"assistant")},
-          h("div",{class:"bubble-label"},m.role==="user"?"You (Consultant)":"Teresa (Customer)"),
-          m.content
-        )
-      ));
-    });
-    if(loading){
-      msgList.appendChild(h("div",{class:"msg-row fadein"},
-        h("div",{class:"bubble assistant"},
-          h("div",{class:"bubble-label"},"Teresa (Customer)"),
-          h("span",{class:"typing-dot"}),h("span",{class:"typing-dot"}),h("span",{class:"typing-dot"})
-        )
-      ));
-    }
-    const taEl=h("textarea",{placeholder:"Type your response... (Enter to send)",rows:"2",style:"flex:1"});
-    taEl.value=inputVal;
-    taEl.addEventListener("input",e=>{inputVal=e.target.value;});
-    taEl.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendText(inputVal);}});
-    const sendBtn=h("button",{class:"btn btn-primary",style:"align-self:stretch;padding:0 18px",onclick:()=>sendText(inputVal)},"Send");
-    if(loading||!inputVal.trim())sendBtn.disabled=true;
-
-    const transcriptBlock=showTranscript?h("div",{class:"card",style:"margin-top:.625rem"},
-      h("div",{style:"background:#eff6ff;padding:10px 14px;border-bottom:1px solid #bfdbfe"},
-        h("div",{style:"font-size:13px;font-weight:600;color:#1e40af;margin-bottom:2px"},"Your transcript"),
-        h("div",{style:"font-size:12px;color:#3b82f6;margin-bottom:8px"},"Click inside to select all, then copy and paste into your Google Doc."),
-        h("a",{class:"btn btn-sm btn-primary",href:"https://docs.google.com/document/d/1EBbo9slCB-sLSUTUX2DyhNvWoBLdyjl0q8s92Qw5J9Y/copy",target:"_blank",style:"text-decoration:none"},"Make a copy of results doc →")
-      ),
-      (()=>{const t=h("textarea",{rows:"5",style:"border:none;resize:none;border-radius:0;font-family:monospace;font-size:12px"});t.readOnly=true;t.value=getTx();t.addEventListener("click",e=>e.target.select());return t;})()
-    ):null;
-
-    return h("div",{class:"page"},
-      h("div",{class:"chat-wrap"},
-        h("div",{class:"chat-header"},
-          h("div",null,
-            h("div",{class:"cname"},"Teresa Canopy - Local Engravers Ltd."),
-            h("div",{class:"csub"},"Outbound call · "+PHONE)
-          ),
-          h("span",{class:"conn-pill"},"● Connected")
-        ),
-        h("div",{class:"info-strip"},
-          ...["Role:Business Owner","Reason:Accounting Solution","Solution:Excel","Email:teresacanopy@localengravers.co.uk"].map(f=>{
-            const[l,v]=f.split(":");
-            return h("div",null,h("span",{style:"color:#94a3b8;font-weight:600"},l+" "),v);
-          })
-        ),
-        msgList,
-        h("div",{class:"alert alert-warn",style:"margin-top:.625rem;font-size:12px"},
-          "Save your transcript before ending. Click ",h("strong",null,"Save transcript")," below, then copy it into a Google Doc."
-        ),
-        h("div",{class:"input-row"},taEl,sendBtn),
-        transcriptBlock,
-        confirmEnd?h("div",{class:"alert alert-danger",style:"margin-top:.5rem"},"Did you save your transcript? Click ",h("strong",null,"Yes, end & score")," to continue."):null,
-        h("div",{style:"display:flex;gap:8px;margin-top:.5rem"},
-          h("button",{class:"btn"+(messages.length===0?" disabled":""),style:"flex:1",onclick:()=>{if(messages.length===0)return;showTranscript=!showTranscript;render();}},showTranscript?"Hide transcript":"Save transcript"),
-          !confirmEnd
-            ?h("button",{class:"btn btn-danger",style:"flex:2",onclick:()=>{confirmEnd=true;render();}},"End call & score →")
-            :h("button",{class:"btn btn-danger",style:"flex:2",onclick:endAndScore},"Yes, end & score →")
-        )
-      )
-    );
-  }
-
-  if(phase==="scoring"){
-    const fill=h("div",{style:"height:4px;background:#236CFF;border-radius:99px;width:0;transition:width 14s linear"});
-    const div=h("div",{class:"page",style:"text-align:center;padding-top:3.5rem"},
-      h("div",{style:"font-size:2.5rem;margin-bottom:1rem"},"📋"),
-      h("div",{style:"font-size:18px;font-weight:600;margin-bottom:.5rem;color:#0f172a"},"Scoring your call..."),
-      h("p",{style:"max-width:40ch;margin:0 auto 2rem"},"Your coach is reviewing the transcript against the full scorecard rubric. This usually takes about 15 seconds."),
-      h("div",{style:"height:4px;background:#e2e8f0;border-radius:99px;max-width:320px;margin:0 auto;overflow:hidden"},fill)
-    );
-    setTimeout(()=>{fill.style.width="90%";},50);
-    return div;
-  }
-
-  if(phase==="results"&&scoreData){
-    if(scoreData.error)return h("div",{class:"page",style:"text-align:center;padding-top:3rem"},
-      h("div",{style:"font-size:2rem;margin-bottom:1rem"},"⚠️"),
-      h("div",{style:"font-size:16px;font-weight:600;margin-bottom:.5rem;color:#0f172a"},"Scoring failed"),
-      h("p",{style:"max-width:40ch;margin:0 auto"},"If you saved your transcript, share it with your facilitator and note that scoring failed.")
-    );
-
-    const grand=scoreData.grand_total||0;
-    const overall=grand<=21?"Does Not Meet Expectations":grand<=32?"Meets Expectations":"Exceeds Expectations";
-    const oc=overall==="Does Not Meet Expectations"?{bg:"#fef2f2",color:"#991b1b"}:overall==="Meets Expectations"?{bg:"#fffbeb",color:"#92400e"}:{bg:"#f0fdf4",color:"#166534"};
-
-    const rTxt="PERFORMANCE SKILL CHECK 1B - RESULTS\nOutbound New Hire | Teresa Canopy / Local Engravers Ltd.\n\nOVERALL: "+overall+" ("+grand+"/48)\n\nSCORECARD\n"+
-      CRITERIA.map(c=>{const s=scoreData.scores?.[c.key]||0;return c.seg+" | "+c.label+": "+SL[s]+" ("+s+"/3)";}).join("\n")+
-      "\n\nSTRENGTHS\n"+(scoreData.strengths||[]).map((s,i)=>(i+1)+". "+s).join("\n")+
-      "\n\nOPPORTUNITIES\n"+(scoreData.opportunities||[]).map((s,i)=>(i+1)+". "+s).join("\n")+
-      "\n\nCOACHING SUMMARY\n"+(scoreData.coaching_summary||"")+
-      "\n\nTRANSCRIPT\n"+(scoreData.transcript||"");
-
-    const copyBtn=h("button",{class:"btn btn-sm btn-primary",style:"margin-bottom:8px;width:100%",onclick:async()=>{
-      try{await navigator.clipboard.writeText(rTxt);copyBtn.textContent="✓ Copied!";copyBtn.className="btn btn-sm btn-success";copyBtn.style.marginBottom="8px";copyBtn.style.width="100%";setTimeout(()=>{copyBtn.textContent="Copy results";copyBtn.className="btn btn-sm btn-primary";copyBtn.style.marginBottom="8px";copyBtn.style.width="100%";},2000);}catch(e){}
-    }},"Copy results");
-
-    const panels=SEGS.map((seg,si)=>{
-      const sc=CRITERIA.filter(c=>seg.keys.includes(c.key));
-      const earned=sc.reduce((s,c)=>s+(scoreData.scores?.[c.key]||0),0);
-      const pct=Math.round((earned/seg.max)*100);
-      const bc=pct>=75?"#16a34a":pct>=40?"#d97706":"#dc2626";
-      const fill=h("div",{class:"prog-fill",style:"width:0;background:"+bc});
-      const panel=h("div",{class:"score-panel fadein",style:"animation-delay:"+(si*.07)+"s"},
-        h("div",{class:"score-panel-header"},h("span",{class:"seg-name"},seg.name),h("span",{class:"seg-pts"},earned+" / "+seg.max)),
-        h("div",{class:"prog-track"},fill),
-        ...sc.map(c=>{const s=scoreData.scores?.[c.key]||0;return h("div",{class:"score-row"},h("span",null,c.label),h("span",{class:"badge b"+s},SL[s]));})
-      );
-      setTimeout(()=>{fill.style.transition="width 1s cubic-bezier(.16,1,.3,1)";fill.style.width=pct+"%";},100+si*70);
-      return panel;
-    });
-
-    return h("div",{class:"page"},
-      h("div",{class:"overline",style:"margin-bottom:6px"},"Performance Skill Check 1B"),
-      h("h1",null,"Your results"),
-      h("div",{class:"overall-badge stamp",style:"background:"+oc.bg+";color:"+oc.color},
-        h("div",null,
-          h("div",{style:"font-size:19px;font-weight:700"},overall),
-          h("div",{style:"font-size:13px;opacity:.7;margin-top:2px"},"Total: "+grand+" / 48 points")
-        ),
-        h("div",{style:"font-size:2rem;opacity:.5"},overall==="Exceeds Expectations"?"🏆":overall==="Meets Expectations"?"👍":"📚")
-      ),
-      ...panels,
-      h("div",{class:"card"},h("div",{class:"card-body"},
-        h("div",{style:"font-size:14px;font-weight:600;margin-bottom:14px;color:#0f172a"},"Coaching feedback"),
-        h("div",{style:"font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px"},"Strengths"),
-        ...(scoreData.strengths||[]).map(s=>h("div",{class:"coaching-item"},h("span",{style:"color:#16a34a;font-weight:700;flex-shrink:0"},"✓"),s)),
-        h("div",{style:"font-size:11px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.08em;margin:12px 0 8px"},"Growth opportunities"),
-        ...(scoreData.opportunities||[]).map(s=>h("div",{class:"coaching-item"},h("span",{style:"color:#d97706;font-weight:700;flex-shrink:0"},"↗"),s)),
-        h("div",{style:"font-size:13px;line-height:1.7;color:#64748b;font-style:italic;background:#f8fafc;padding:12px 14px;border-radius:10px;margin-top:12px"},"“"+(scoreData.coaching_summary||"")+"”")
-      )),
-      h("div",{class:"divider"}),
-      h("div",{class:"overline",style:"margin-bottom:14px"},"Complete your assessment"),
-      h("div",{class:"step-card"},
-        h("div",{class:"step-header",style:"background:#eff6ff;border-bottom-color:#bfdbfe"},
-          h("div",{class:"step-num",style:"background:#236CFF;color:#fff"},"1"),
-          h("div",{style:"font-size:14px;font-weight:600;color:#1e40af"},"Save your results")
-        ),
-        h("div",{class:"step-body"},
-          h("p",{style:"margin-bottom:12px"},"Copy your full results and paste into the Google Doc you made during the transcript step."),
-          copyBtn,
-          (()=>{const t=h("textarea",{rows:"8",style:"font-family:monospace;font-size:12px;margin-bottom:8px"});t.readOnly=true;t.value=rTxt;t.addEventListener("click",e=>e.target.select());return t;})(),
-          h("div",{class:"alert alert-warn",style:"font-size:12px"},"Paste into the Google Doc you already made during the transcript step.")
-        )
-      ),
-      h("div",{class:"step-card"},
-        h("div",{class:"step-header",style:"background:#f0fdf4;border-bottom-color:#86efac"},
-          h("div",{class:"step-num",style:"background:#16a34a;color:#fff"},"2"),
-          h("div",{style:"font-size:14px;font-weight:600;color:#166534"},"Record your Salesforce workflow in Zoom")
-        ),
-        h("div",{class:"step-body"},
-          h("div",{class:"alert alert-danger",style:"font-size:12px;font-weight:600;margin-bottom:10px"},"You MUST record this meeting and SHARE YOUR SCREEN the entire time."),
-          h("p",{style:"margin-bottom:10px"},"Record yourself completing the full end-to-end process for Teresa Canopy:"),
-          ...ZOOM_STEPS.map((s,i)=>h("div",{class:"zoom-step"},h("div",{class:"zoom-num"},i+1),h("div",null,s))),
-          h("a",{class:"btn btn-success btn-full",href:"https://intuit.zoom.us/meeting#/upcoming",target:"_blank",style:"margin-top:10px;text-decoration:none"},"Open Zoom →")
-        )
-      ),
-      h("div",{class:"step-card",style:"border-color:#93c5fd"},
-        h("div",{class:"step-header",style:"background:#00254A"},
-          h("div",{class:"step-num",style:"background:#fff;color:#00254A"},"3"),
-          h("div",{style:"font-size:14px;font-weight:600;color:#fff"},"Submit to complete your assessment")
-        ),
-        h("div",{class:"step-body"},
-          h("p",{style:"margin-bottom:12px"},"Once you have your saved results and your Zoom recording link, click below to open the submission form."),
-          h("a",{class:"btn btn-primary btn-full",href:"https://forms.gle/XYWdZDFuSfovPudV7",target:"_blank",style:"text-decoration:none"},"Submit to Google Form →")
-        )
-      ),
-      h("div",{style:"margin-top:1rem"},
-        !confirmRestart
-          ?h("button",{class:"btn btn-full",onclick:()=>{confirmRestart=true;render();}},"Try again")
-          :h("div",null,
-            h("div",{class:"alert alert-danger",style:"margin-bottom:8px"},h("strong",null,"Are you sure?")," Your transcript and results will be gone. Make sure you've saved everything first."),
-            h("div",{style:"display:flex;gap:8px"},
-              h("button",{class:"btn",style:"flex:1",onclick:()=>{confirmRestart=false;render();}},"Go back"),
-              h("button",{class:"btn btn-danger",style:"flex:2",onclick:resetAll},"Yes, start over →")
-            )
-          )
-      )
-    );
-  }
-  return h("div",null);
+  },900);
 }
 
-function getTx(){return messages.map(m=>(m.role==="user"?"CONSULTANT":"TERESA (Customer)")+":\n"+m.content).join("\n\n");}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-async function sendText(text){
-  if(!text.trim()||loading)return;
-  messages=[...messages,{role:"user",content:text}];
-  inputVal="";loading=true;render();
-  try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-allow-browser":"true"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:SYSTEM_PROMPT,messages:messages.map(m=>({role:m.role,content:m.content}))})
-    });
-    const data=await res.json();
-    const reply=data.content?.find(b=>b.type==="text")?.text||"...";
-    messages=[...messages,{role:"assistant",content:reply}];
-  }catch(e){messages=[...messages,{role:"assistant",content:"(Connection error - please try again)"}];}
-  loading=false;render();
-  setTimeout(()=>{const ml=document.getElementById("msglist");if(ml)ml.scrollTop=ml.scrollHeight;},50);
+function showResults(){
+var cs=document.getElementById('conversation-screen');
+document.body.style.overflow='';
+document.documentElement.style.overflow='';
+var rs=document.getElementById('results-screen');
+fadeOut(cs,function(){
+rs.style.display='block';
+var total=0;Object.keys(scores).forEach(function(k){total+=scores[k];});
+var badgeText,badgeClass,coachSummary;
+if(total>=33){badgeText='Exceeds Expectations';badgeClass='badge-exceeds';coachSummary="Excellent call. You demonstrated a strong consultative approach throughout, building genuine rapport, uncovering real pain, and closing with confidence. Teresa left feeling heard and valued - not sold to.";}
+else if(total>=22){badgeText='Meets Expectations';badgeClass='badge-meets';coachSummary="A solid call with real strengths. You connected well in places but there are opportunities to go deeper in discovery and be more deliberate about closing. Focus on probing beneath the surface and revisiting your upfront contract before proposing next steps.";}
+else{badgeText='Does Not Meet Expectations';badgeClass='badge-dnm';coachSummary="The call had some challenging moments. The key opportunity is to slow down, ask more, and tell less. Teresa needs to feel understood before she'll be open to a solution. Focus on open questions, empathy, and building an upfront contract early.";}
+var html='';
+html+='<div class="results-header">';
+html+='<div class="results-badge '+badgeClass+'">'+badgeText+'</div>';
+html+='<div class="results-score-big">'+total+'<span style="font-size:24px;opacity:0.6;">/48</span></div>';
+html+='<div class="results-score-label">Overall score - Pass mark: 32</div>';
+html+='</div>';
+segments.forEach(function(seg){
+var sc=criteria.filter(function(c){return c.segment===seg.name;});
+var st=0;sc.forEach(function(c){st+=scores[c.key];});
+var pct=Math.round((st/seg.max)*100);
+var bid='bar-'+seg.name.replace(/\s/g,'-');
+html+='<div class="segment-panel">';
+html+='<div class="segment-header"><div class="segment-title">'+seg.name+'</div><div class="segment-score">'+st+' / '+seg.max+'</div></div>';
+html+='<div class="segment-bar-wrap"><div class="segment-bar-fill" id="'+bid+'" data-pct="'+pct+'"></div></div>';
+html+='<div class="criteria-list">';
+sc.forEach(function(c){
+var s=scores[c.key];
+var sl=['Not Observed','Developing','Proficient','Advanced'][s];
+html+='<div class="criteria-item"><div class="criteria-row"><div class="criteria-name">'+c.label+'</div><span class="score-badge s'+s+'">'+sl+'</span></div>';
+html+='<div class="criteria-feedback">'+coaching[c.key][s]+'</div></div>';
+});
+html+='</div></div>';
+});
+html+='<div class="coaching-panel"><h3>Coaching Summary</h3><p>'+coachSummary+'</p>';
+var strengths=criteria.filter(function(c){return scores[c.key]===3;});
+var growth=criteria.filter(function(c){return scores[c.key]<=1;});
+if(strengths.length>0){html+='<h3 style="margin-top:16px;">Strengths</h3><ul class="strengths-list">';strengths.forEach(function(c){html+='<li>'+c.label+'</li>';});html+='</ul>';}
+if(growth.length>0){html+='<h3 style="margin-top:16px;">Growth Areas</h3><ul class="growth-list">';growth.forEach(function(c){html+='<li>'+c.label+'</li>';});html+='</ul>';}
+html+='</div>';
+var copyTxt=buildCopyText(total,badgeText,coachSummary);
+html+='<div class="copy-section"><h3>Your Results Summary</h3>';
+html+='<textarea class="copy-textarea" id="copy-textarea" readonly>'+copyTxt+'</textarea>';
+html+='<div style="display:flex;gap:10px;flex-wrap:wrap;"><button class="copy-btn" id="copy-btn" onclick="copyResults()">Copy Results</button><button class="restart-btn" onclick="restartSim()">Start Again</button></div></div>';
+rs.innerHTML=html;
+fadeIn(rs,'block',function(){
+  setTimeout(function(){document.querySelectorAll('.segment-bar-fill').forEach(function(b){b.style.width=b.getAttribute('data-pct')+'%';});},100);
+});
+});
 }
 
-async function runScoring(transcript){
-  phase="scoring";render();
-  try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-allow-browser":"true"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:SCORE_PROMPT+transcript}]})
-    });
-    const data=await res.json();
-    const raw=data.content?.find(b=>b.type==="text")?.text||"";
-    const m=raw.match(/\{[\s\S]*\}/);
-    if(!m)throw new Error("no json");
-    const parsed=JSON.parse(m[0]);
-    const s=parsed.scores||{};
-    const it=(s.build_rapport||0)+(s.set_agenda||0)+(s.role_clarification||0)+(s.upfront_contract||0);
-    const dt=(s.transition_insight||0)+(s.open_questions||0)+(s.probing_questions||0)+(s.confirming_questions||0)+(s.platform_positioning||0)+(s.active_listening||0);
-    const pt=s.customer_story||0;
-    const pr=(s.objection_handling||0)+(s.recap_validate||0)+(s.revisit_upfront||0)+(s.next_steps||0)+(s.confirmed_commitment||0);
-    scoreData={...parsed,intro_total:it,discovery_total:dt,poc_total:pt,progress_total:pr,grand_total:it+dt+pt+pr,transcript};
-    phase="results";
-  }catch(e){scoreData={error:true};phase="results";}
-  render();
+function buildCopyText(total,badgeText,coachSummary){
+var lines=[];
+lines.push('Teresa Canopy Role Play - EMEA Sales Simulation');
+lines.push('================================================');
+lines.push('Overall Score: '+total+'/48 - '+badgeText);
+lines.push('');
+segments.forEach(function(seg){
+var sc=criteria.filter(function(c){return c.segment===seg.name;});
+var st=0;sc.forEach(function(c){st+=scores[c.key];});
+lines.push(seg.name+': '+st+'/'+seg.max);
+sc.forEach(function(c){var s=scores[c.key];var sl=['Not Observed','Developing','Proficient','Advanced'][s];lines.push('  - '+c.label+': '+sl+' ('+s+'/3)');});
+lines.push('');
+});
+lines.push('Coaching: '+coachSummary);
+lines.push('');
+var strengths=criteria.filter(function(c){return scores[c.key]===3;});
+var growth=criteria.filter(function(c){return scores[c.key]<=1;});
+if(strengths.length>0){lines.push('Strengths:');strengths.forEach(function(c){lines.push('+ '+c.label);});lines.push('');}
+if(growth.length>0){lines.push('Growth Areas:');growth.forEach(function(c){lines.push('^ '+c.label);});}
+return lines.join('\n');
 }
 
-function endAndScore(){
-  const tx=messages.map(m=>(m.role==="user"?"CONSULTANT":"TERESA (Customer)")+": "+m.content).join("\n\n");
-  runScoring(tx);
+function copyResults(){
+var ta=document.getElementById('copy-textarea');ta.select();
+try{document.execCommand('copy');}catch(e){navigator.clipboard&&navigator.clipboard.writeText(ta.value);}
+var btn=document.getElementById('copy-btn');btn.textContent='Copied!';btn.classList.add('copied');
+setTimeout(function(){btn.textContent='Copy Results';btn.classList.remove('copied');},2000);
 }
 
-function resetAll(){
-  phase="intro";messages=[];inputVal="";loading=false;scoreData=null;
-  showTranscript=false;confirmEnd=false;showResultsText=false;confirmRestart=false;
-  pastedTranscript="";keyDigits="";keyWrong=false;render();
+function restartSim(){
+  var rs=document.getElementById('results-screen');
+  fadeOut(rs,function(){
+    stepIndex=0;track='good';chatHistory=[];dialNumber='';resetStepTexts();
+    scores={build_rapport:0,set_agenda:0,role_clarification:0,upfront_contract:0,transition_insight:0,open_questions:0,probing_questions:0,confirming_questions:0,platform_positioning:0,active_listening:0,customer_story:0,objection_handling:0,recap_validate:0,revisit_upfront:0,next_steps:0,confirmed_commitment:0};
+    rs.innerHTML='';
+    document.getElementById('chat-zone').innerHTML='';
+    document.getElementById('dial-text').textContent='';
+    document.getElementById('dial-display').classList.remove('has-digits');
+    document.getElementById('call-btn').classList.remove('visible');
+    document.getElementById('conversation-screen').style.display='none';
+    document.getElementById('keypad-screen').style.display='none';
+    document.getElementById('name-prompt').style.opacity='0';
+    document.getElementById('name-prompt').style.maxHeight='0';
+    document.getElementById('consultant-name').value='';
+    document.body.style.overflow='';
+    updateTrackPill();
+    fadeIn(document.getElementById('briefing-screen'),'block');
+  });
 }
 
-render();
+buildKeypad();
 </script>
 </body>
 </html>
